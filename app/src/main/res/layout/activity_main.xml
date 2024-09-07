@@ -3,17 +3,90 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:backgroundTint="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/header_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/ECM_TEXT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="45sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:text="ECM" />
+
+        <TextView
+            android:id="@+id/ECM_FULLFORM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/secondary"
+            android:text="ELLECTION COMMISSION OF MAIPAL" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/vote"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header_title" />
+
+    <TextView
+        android:id="@+id/ECM_TEXT_SLOGAN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Vote, Your Voice, Your Campus"
+        android:textColor="@color/secondary"
+        app:layout_constraintBottom_toTopOf="@+id/Landing_buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+    <LinearLayout
+        android:paddingVertical="10dp"
+        android:id="@+id/Landing_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="20sp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/enterAdminBttn"
+            style="@style/SolidButton"
+            android:text="Enter As Admin" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/enterCandidateBttn"
+            style="@style/BorderButton"
+            android:text="Enter As Candidate" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/enterVoterBttn"
+            style="@style/BorderButton"
+            android:text="Enter As Voter" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
