@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MEC</string>
+    <string name="slogan">Your Vote, Your Voice, Your Campus</string>
+    <string name="ECM_fullform">ELLECTION COMMISSION OF MAIPAL</string>
+    <string name="ECM">ECM</string>
+    <string name="ballet_image">ballet image</string>
+    <string name="enter_as_admin">Enter As Admin</string>
+    <string name="enter_as_candidate">Enter As Candidate</string>
+    <string name="enter_as_voter">Enter As Voter</string>
 </resources>

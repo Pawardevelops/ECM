@@ -27,14 +27,14 @@
             android:textSize="45sp"
             android:textStyle="bold"
             android:textColor="@color/primary"
-            android:text="ECM" />
+            android:text="@string/ECM" />
 
         <TextView
             android:id="@+id/ECM_FULLFORM"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/secondary"
-            android:text="ELLECTION COMMISSION OF MAIPAL" />
+            android:text="@string/ECM_fullform" />
     </LinearLayout>
 
     <ImageView
@@ -42,6 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:contentDescription="@string/ballet_image"
         android:src="@drawable/vote"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -52,7 +53,7 @@
         android:id="@+id/ECM_TEXT_SLOGAN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Vote, Your Voice, Your Campus"
+        android:text="@string/slogan"
         android:textColor="@color/secondary"
         app:layout_constraintBottom_toTopOf="@+id/Landing_buttons"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,17 +76,17 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/enterAdminBttn"
             style="@style/SolidButton"
-            android:text="Enter As Admin" />
+            android:text="@string/enter_as_admin" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/enterCandidateBttn"
             style="@style/BorderButton"
-            android:text="Enter As Candidate" />
+            android:text="@string/enter_as_candidate" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/enterVoterBttn"
             style="@style/BorderButton"
-            android:text="Enter As Voter" />
+            android:text="@string/enter_as_voter" />
 
     </LinearLayout>
 
