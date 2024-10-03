@@ -7,4 +7,11 @@
     <string name="enter_as_admin">Enter As Admin</string>
     <string name="enter_as_candidate">Enter As Candidate</string>
     <string name="enter_as_voter">Enter As Voter</string>
+    <string name="Welcome_candidate">WELCOME Candidate</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign up</string>
+    <string name="createYourCandidateAccount">Create Your Candidate Account</string>
+    <string name="createAccountText">Fill your information below \nand  create your account</string>
+    <string name="already_have_an_account">Already have an Account ?</string>
+
 </resources>
