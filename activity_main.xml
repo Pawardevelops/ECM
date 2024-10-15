@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ECM"
+        android:textSize="40sp"
+        android:textColor="#4285F4"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_horizontal" />
+
+
+    <TextView
+        android:id="@+id/tv_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Election Commission of Manipal"
+        android:textSize="16sp"
+        android:textColor="#666666"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="20dp" />
+
+
+    <TextView
+        android:id="@+id/tv_selected_candidate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="candidate you selected"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:layout_marginBottom="10dp" />
+
+
+    <LinearLayout
+        android:id="@+id/ll_candidate_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="@color/secondary"
+        android:layout_marginBottom="20dp">
+
+
+        <ImageView
+            android:id="@+id/iv_candidate_photo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/vote"
+            android:contentDescription="Candidate Photo"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="16dp" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tv_candidate_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pawar Sachin"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginBottom="4dp" />
+
+
+            <TextView
+                android:id="@+id/tv_candidate_section"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="section B"
+                android:textSize="16sp"
+                android:textColor="#666666" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_agenda_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Agenda"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:layout_marginBottom="8dp" />
+
+
+    <TextView
+        android:id="@+id/tv_agenda_text"
+        android:layout_width="332dp"
+        android:layout_height="146dp"
+        android:background="#DDDDDD"
+        android:padding="16dp"
+        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s..."
+        android:textColor="#333333"
+        android:textSize="14sp" />
+
+
+    <Button
+        android:id="@+id/btn_vote"
+        android:layout_width="334dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#4285F4"
+        android:text="VOTE"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+
+</LinearLayout>
