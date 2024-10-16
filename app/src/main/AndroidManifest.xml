@@ -13,33 +13,6 @@
         android:theme="@style/Theme.MEC"
         tools:targetApi="31">
         <activity
-            android:name=".voter_registered_successfully"
-            android:exported="false" />
-        <activity
-            android:name=".voters_all_candidates"
-            android:exported="false" />
-        <activity
-            android:name=".voters_allCandidate_result"
-            android:exported="false" />
-        <activity
-            android:name=".voters_homepage"
-            android:exported="false" />
-        <activity
-            android:name=".voters_login"
-            android:exported="false" />
-        <activity
-            android:name=".voters_section_menu_result"
-            android:exported="false" />
-        <activity
-            android:name=".voters_signup"
-            android:exported="false" />
-        <activity
-            android:name=".candidateDashboard"
-            android:exported="false" />
-        <activity
-            android:name=".candidateLogin"
-            android:exported="false" />
-        <activity
             android:name=".CandidateSuccessfullyRegistered"
             android:exported="false" />
         <activity
