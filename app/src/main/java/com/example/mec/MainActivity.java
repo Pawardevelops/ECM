@@ -11,6 +11,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.mec.services.NavigationService;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -28,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Navigate to AdminLoginActivity
-                Intent intent = new Intent(MainActivity.this, adminlogin.class);
-                startActivity(intent);
+                NavigationService.navigateToActivity(MainActivity.this, adminlogin.class);
+
             }
         });
 
@@ -37,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Navigate to CandidateLoginActivity
-                Intent intent = new Intent(MainActivity.this, candidateLogin.class);
-                startActivity(intent);
+                NavigationService.navigateToActivity(MainActivity.this, candidateLogin.class);
+
             }
         });
 
@@ -46,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Navigate to VoterLoginActivity
-                Intent intent = new Intent(MainActivity.this, voters_login.class);
-                startActivity(intent);
+                NavigationService.navigateToActivity(MainActivity.this, voters_login.class);
+
             }
         });
     }
