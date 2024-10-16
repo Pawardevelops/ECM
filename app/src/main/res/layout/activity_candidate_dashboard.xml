@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:backgroundTint="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/candidate_signup_page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        >
+        <LinearLayout
+            android:id="@+id/header_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:id="@+id/ECM_TEXT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="45sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary"
+                android:text="@string/ECM" />
+
+            <TextView
+                android:id="@+id/ECM_FULLFORM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="@string/ECM_fullform" />
+        </LinearLayout>
+    <LinearLayout
+        android:id="@+id/header_title2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        >
+        <Button
+            android:layout_width="125dp"
+            android:layout_height="100dp"
+            android:id="@+id/candidate_profile"
+            android:text="Profile"
+            android:background="@drawable/bordered_button"
+            />
+        <Button
+            android:layout_width="125dp"
+            android:layout_height="100dp"
+            android:id="@+id/candidate_result"
+            android:layout_marginLeft="20dp"
+            android:text="result"
+            android:background="@drawable/bordered_button"
+            />
+
+
+    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/header_title3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            >
+            <Button
+                android:layout_width="125dp"
+                android:layout_height="100dp"
+                android:id="@+id/candidate_candidates"
+                android:text="Candidates"
+                android:background="@drawable/bordered_button"
+                />
+            <Button
+                android:layout_width="125dp"
+                android:layout_height="100dp"
+                android:id="@+id/candidate_election_create"
+                android:layout_marginLeft="20dp"
+                android:text="Election \nCreate"
+                android:background="@drawable/bordered_button"
+                />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
