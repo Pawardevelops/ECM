@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+
+        <TextView
+            android:id="@+id/ecmTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ECM"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="#1E88E5"
+            android:layout_marginTop="40dp" />
+
+        <!-- ECM Subtitle -->
+        <TextView
+            android:id="@+id/ecmSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Election Commission of Manipal"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:layout_marginBottom="20dp" />
+
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rowCount="2"
+            android:columnCount="2"
+            android:layout_gravity="center">
+
+            <Button
+                android:id="@+id/profileButton"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:text="Profile"
+                android:backgroundTint="#E3F2FD"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_margin="8dp"/>
+
+            <Button
+                android:id="@+id/resultsButton"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:text="Results"
+                android:backgroundTint="#E3F2FD"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_margin="8dp"/>
+
+            <Button
+                android:id="@+id/candidatesButton"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:text="Candidates"
+                android:backgroundTint="#E3F2FD"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_margin="8dp"/>
+
+            <Button
+                android:id="@+id/helpButton"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:text="Help"
+                android:backgroundTint="#E3F2FD"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_margin="8dp"/>
+        </GridLayout>
+
+
+        <TextView
+            android:id="@+id/electionsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Elections"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="16dp" />
+
+
+        <Button
+            android:id="@+id/campaignManagementButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Campaign management"
+            android:backgroundTint="#E3F2FD"
+            android:textColor="#000000"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/supporterInteractionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Supporter Interaction"
+            android:backgroundTint="#E3F2FD"
+            android:textColor="#000000"
+            android:layout_marginBottom="16dp" />
+    </LinearLayout>
+</ScrollView>

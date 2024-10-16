@@ -13,13 +13,13 @@
         android:theme="@style/Theme.MEC"
         tools:targetApi="31">
         <activity
-            android:name=".CandidateSuccessfullyRegistered"
+            android:name=".voted_successfully"
             android:exported="false" />
         <activity
-            android:name=".CandidateSignup"
+            android:name=".adminsignup"
             android:exported="false" />
         <activity
-            android:name=".CandidateHomePage"
+            android:name=".adminlogin"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
