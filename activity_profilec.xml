@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".profilec"
+    android:background="@android:color/white">
+
+    <!-- Back Button -->
+
+    <!-- Profile Header (Username and Register Number) -->
+
+    <!-- CircleImageView for Profile Picture -->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Back"
+        android:src="@drawable/back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/profile_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Profile"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.372"
+        app:layout_constraintStart_toEndOf="@+id/backButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Username and Register Number -->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="140dp"
+        android:layout_height="127dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/circle_shape"
+        app:civ_border_color="@color/primary"
+        app:civ_border_width="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_header" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ABC"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/profile_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/registerNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="123456"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/username"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- User Info Section (Background Box) -->
+
+    <!-- Log Out Button -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/user_info_container"
+        android:layout_width="380dp"
+        android:layout_height="373dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/secondary"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/registerNumber"
+        app:layout_constraintWidth_default="spread">
+
+        <!-- Phone Number Field -->
+        <TextView
+            android:id="@+id/phone_label"
+            android:layout_width="53dp"
+            android:layout_height="29dp"
+            android:text="Phone"
+            android:textColor="@color/black"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Department Spinner -->
+
+        <EditText
+            android:id="@+id/phone_number"
+            android:layout_width="244dp"
+            android:layout_height="46dp"
+            android:hint="Enter phone number"
+            android:inputType="phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_default="spread"
+            tools:layout_editor_absoluteY="-6dp" />
+
+        <!-- Section Spinner -->
+
+        <!-- Course Field -->
+
+        <TextView
+            android:id="@+id/dept_label"
+            android:layout_width="97dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="20dp"
+            android:text="Depatment"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phone_number" />
+
+        <Spinner
+            android:id="@+id/dept_spinner"
+            android:layout_width="242dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="20dp"
+            android:entries="@array/department_options"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phone_number" />
+
+        <!-- Semester Spinner -->
+
+        <TextView
+            android:id="@+id/section_label"
+            android:layout_width="74dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="20dp"
+            android:text="Section"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dept_spinner" />
+
+        <Spinner
+            android:id="@+id/section_spinner"
+            android:layout_width="244dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="20dp"
+            android:entries="@array/section_options"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dept_spinner" />
+
+        <!-- Candidate Spinner -->
+
+        <TextView
+            android:id="@+id/course_label"
+            android:layout_width="89dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="20dp"
+            android:text="Course"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/section_spinner" />
+
+        <EditText
+            android:id="@+id/course_field"
+            android:layout_width="244dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="20dp"
+            android:hint="Enter course"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.96"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/section_spinner" />
+
+        <TextView
+            android:id="@+id/sem_label"
+            android:layout_width="65dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="24dp"
+            android:text="Sem"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/course_field" />
+
+        <Spinner
+            android:id="@+id/sem_spinner"
+            android:layout_width="244dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="16dp"
+            android:entries="@array/sem_options"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.961"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/course_field" />
+
+        <TextView
+            android:id="@+id/candidate_label"
+            android:layout_width="89dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="20dp"
+            android:text="Candidate"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sem_spinner" />
+
+        <Spinner
+            android:id="@+id/candidate_spinner"
+            android:layout_width="244dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:entries="@array/candidate_options"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sem_spinner" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="206dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/primary"
+        android:text="Log out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_info_container"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

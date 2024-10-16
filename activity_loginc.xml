@@ -1,0 +1,167 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
+    tools:context=".MainActivity">
+
+    <!-- Candidate Signup Page -->
+    <LinearLayout
+        android:id="@+id/candidate_signup_page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Header Title -->
+        <LinearLayout
+            android:id="@+id/header_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <!-- Election Commission Title -->
+
+            <!-- ECM Full Form -->
+            <TextView
+                android:id="@+id/ECM_TEXT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ECM"
+                android:textColor="@color/primary"
+                android:textSize="45sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ECM_FULLFORM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="ECM_fullform" />
+        </LinearLayout>
+
+        <!-- Sub Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+            <!-- Welcome Back Text -->
+            <TextView
+                android:id="@+id/candidate_h2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginTop="30dp"
+                android:text="welcome back" />
+
+            <!-- Login Info Text -->
+            <TextView
+                android:id="@+id/candidate_create_account_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:text="Login with the data you entered during your registration" />
+        </LinearLayout>
+
+        <!-- Input Fields for Login -->
+        <LinearLayout
+            android:id="@+id/candidate_login_input_fields"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="50dp">
+
+            <!-- Email Input Field -->
+            <EditText
+                android:id="@+id/email_input"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                style="@style/gray_border_input_fields"
+                android:hint="Email" />
+
+            <!-- Password Input Field -->
+            <EditText
+                android:id="@+id/password_input"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                style="@style/gray_border_input_fields"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
+        <!-- Forgot Password Text -->
+        <TextView
+            android:id="@+id/forget_candidate_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary"
+            android:textStyle="normal"
+            android:textSize="20sp"
+            android:text="forgot password"
+            android:layout_gravity="end"
+            android:paddingRight="10dp"
+            android:layout_marginTop="10dp" />
+
+        <!-- Login Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/loginButton"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="Login"
+            android:layout_marginTop="100dp"
+            style="@style/SolidButton"
+            app:layout_constraintTop_toBottomOf="@id/candidate_login_input_fields"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Sign Up Option -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp">
+
+            <!-- Don't Have an Account Text -->
+            <TextView
+                android:id="@+id/already_have_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:text="don't havean account" />
+
+            <!-- Sign Up Link -->
+            <TextView
+                android:id="@+id/candidate_signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="signup"
+                android:textColor="@color/primary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

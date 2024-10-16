@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ECM"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_blue_light"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Subtitle -->
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Election Commission of Manipal"
+            android:textSize="16sp"
+            android:layout_marginBottom="32dp"
+            android:textColor="@android:color/darker_gray" />
+
+        <!-- Four buttons grid -->
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rowCount="2"
+            android:columnCount="2"
+            android:alignmentMode="alignMargins"
+            android:rowOrderPreserved="false"
+            android:layout_marginBottom="24dp">
+
+            <!-- Profile Button -->
+            <Button
+                android:id="@+id/button_profile"
+                android:layout_width="142dp"
+                android:layout_height="120dp"
+                android:text="Profile"
+                android:backgroundTint="@color/secondary"
+                android:textColor="@android:color/black" />
+
+            <!-- Results Button -->
+            <Button
+                android:id="@+id/button_results"
+                android:layout_width="142dp"
+                android:layout_height="120dp"
+                android:text="Results"
+                android:backgroundTint="@color/secondary"
+                android:textColor="@android:color/black" />
+
+            <!-- Candidates Button -->
+            <Button
+                android:id="@+id/button_candidates"
+                android:layout_width="142dp"
+                android:layout_height="120dp"
+                android:backgroundTint="@color/secondary"
+                android:text="Candidates"
+                android:textColor="@android:color/black" />
+
+            <!-- Help Button -->
+            <Button
+                android:id="@+id/button_help"
+                android:layout_width="142dp"
+                android:layout_height="120dp"
+                android:text="Help"
+                android:backgroundTint="@color/secondary"
+                android:textColor="@android:color/black" />
+        </GridLayout>
+
+        <!-- Elections section -->
+
+        <!-- Campaign Management Button -->
+
+        <TextView
+            android:id="@+id/elections_title"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="16dp"
+            android:text="Elections"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_campaign_management"
+            android:layout_width="match_parent"
+            android:layout_height="71dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/secondary"
+            android:text="Campaign management"
+            android:textColor="@android:color/black" />
+
+        <!-- Supporter Interaction Button -->
+        <Button
+            android:id="@+id/button_supporter_interaction"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:backgroundTint="@color/secondary"
+            android:text="Supporter Interaction"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+</ScrollView>

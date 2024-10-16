@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/candidate_w"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToOutline="true"
+    android:background="@android:color/white">
+
+    <!-- Back Button (Top-Left) -->
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="16dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/back"
+        android:contentDescription="Back" />
+
+    <!-- Vote Box Image -->
+    <ImageView
+        android:id="@+id/img_vote_box"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/vote"
+        android:contentDescription="Vote Box" />
+
+    <!-- Welcome Text -->
+    <TextView
+        android:id="@+id/txt_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_vote_box"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="WELCOME Candidate"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#000000" />
+
+    <!-- Subtitle Text -->
+    <TextView
+        android:id="@+id/txt_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_welcome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Your Vote, Your Voice, Your Campus"
+        android:textSize="14sp"
+        android:textColor="#7A7A7A" />
+
+    <!-- Login Button -->
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="280dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/txt_subtitle"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/primary"
+        android:text="Login"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+
+    <!-- Sign Up Button -->
+    <Button
+        android:id="@+id/btn_signup"
+        android:layout_width="289dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn1"
+        android:text="Sign up"
+        android:textColor="@color/primary"
+        android:textSize="16sp" />
+</RelativeLayout>
+
