@@ -95,6 +95,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="1"
+                android:drawableStart="@drawable/email"
+                android:drawablePadding="12dp"
                 style="@style/gray_border_input_fields"
                 android:hint="Email"
                 />
@@ -103,6 +105,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="1"
+                android:drawableStart="@drawable/password"
+                android:drawablePadding="12dp"
                 style="@style/gray_border_input_fields"
                 android:hint="Password"
                 />

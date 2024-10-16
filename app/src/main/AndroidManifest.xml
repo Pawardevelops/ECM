@@ -12,6 +12,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MEC"
         tools:targetApi="31">
+        <activity
+            android:name=".circle_shape"
+            android:exported="false" />
+        <activity
+            android:name=".profilec"
+            android:exported="false" />
+        <activity
+            android:name=".candidate_profile"
+            android:exported="false" />
+        <activity
+            android:name=".candidate_dashBoard"
+            android:exported="false" />
+        <activity
+            android:name=".voted_successfully"
+            android:exported="false" />
+        <activity
+            android:name=".adminsignup"
+            android:exported="false" />
+        <activity
+            android:name=".adminlogin"
+            android:exported="false" />
 
         <!-- MainActivity -->
         <activity
@@ -72,4 +93,5 @@
         <activity android:name=".voters_signup" android:exported="false" />
 
     </application>
+
 </manifest>

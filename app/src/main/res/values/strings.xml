@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">MEC</string>
+    <string name="app_name">ECM</string>
     <string name="slogan">Your Vote, Your Voice, Your Campus</string>
-    <string name="ECM_fullform">ELLECTION COMMISSION OF MAIPAL</string>
+    <string name="ECM_fullform">ELECTION COMMISSION OF MANIPAL</string>
     <string name="ECM">ECM</string>
     <string name="ballet_image">ballet image</string>
     <string name="enter_as_admin">Enter As Admin</string>
@@ -13,5 +13,43 @@
     <string name="createYourCandidateAccount">Create Your Candidate Account</string>
     <string name="createAccountText">Fill your information below \nand  create your account</string>
     <string name="already_have_an_account">Already have an Account ?</string>
+    <string name="welcome_back">WELCOME BACK</string>
+    <string name="forgot_password">forgot password</string>
+    <string name="don_t_have_an_account">dont have an account</string>
+
+    <string-array name="department_options">
+        <item>Select Department</item>
+        <item>Computer Applications (MCA)</item>
+        <item>Information Technology</item>
+        <item>Business Administration</item>
+        <item>Mechanical Engineering</item>
+        <item>Biotechnology</item>
+        <item>Arts and Humanities</item>
+    </string-array>
+
+
+    <string-array name="section_options">
+        <item>Select Section</item>
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+    </string-array>
+
+    <string-array name="sem_options">
+        <item>Select current Semester</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <string-array name="candidate_options">
+        <item>Select True or false</item>
+        <item>True</item>
+        <item>False</item>
+    </string-array>
+
 
 </resources>
