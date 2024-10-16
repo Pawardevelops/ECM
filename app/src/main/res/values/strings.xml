@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MEC</string>
     <string name="slogan">Your Vote, Your Voice, Your Campus</string>
-    <string name="ECM_fullform">ELLECTION COMMISSION OF MAIPAL</string>
+    <string name="ECM_fullform">ELLECTION COMMISSION OF MANIPAL</string>
     <string name="ECM">ECM</string>
     <string name="ballet_image">ballet image</string>
     <string name="enter_as_admin">Enter As Admin</string>
@@ -13,5 +13,8 @@
     <string name="createYourCandidateAccount">Create Your Candidate Account</string>
     <string name="createAccountText">Fill your information below \nand  create your account</string>
     <string name="already_have_an_account">Already have an Account ?</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="forgot_password">Forgot your Password?</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
 
 </resources>
