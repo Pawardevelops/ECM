@@ -17,6 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="10dp"
+        android:padding="25dp"
         android:gravity="center"
         >
         <LinearLayout
@@ -165,7 +166,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/candidateSignUp"
-            style="@style/BorderButton"
+            style="@style/SolidButton"
             android:layout_marginTop="45dp"
             android:text="@string/signup" />
         <LinearLayout

@@ -38,24 +38,21 @@
         android:layout_marginTop="8dp" />
 
     <!-- Login Button -->
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/loginButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/SolidButton"
         android:text="Login"
-        android:backgroundTint="#2196F3"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="24dp" />
+        />
+
+
 
     <!-- Sign Up Button -->
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signupButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/BorderButton"
         android:text="Sign up"
-        android:backgroundTint="#FFFFFF"
-        android:textColor="#2196F3"
-        android:layout_marginTop="8dp"
-        android:strokeColor="#2196F3" />
+        />
+
+
 
 </LinearLayout>

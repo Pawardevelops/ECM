@@ -61,7 +61,7 @@
                 android:orientation="horizontal"
                 android:padding="12dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/secondary"
+                style="@style/gray_border_input_fields"
                 android:layout_marginBottom="8dp">
 
                 <ImageView
@@ -101,7 +101,7 @@
                 android:orientation="horizontal"
                 android:padding="12dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/secondary"
+                style="@style/gray_border_input_fields"
                 android:layout_marginBottom="8dp">
 
                 <ImageView
@@ -141,7 +141,7 @@
                 android:orientation="horizontal"
                 android:padding="12dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/secondary"
+                style="@style/gray_border_input_fields"
                 android:layout_marginBottom="8dp">
 
                 <ImageView
@@ -181,7 +181,7 @@
                 android:orientation="horizontal"
                 android:padding="12dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/secondary"
+                style="@style/gray_border_input_fields"
                 android:layout_marginBottom="8dp">
 
                 <ImageView

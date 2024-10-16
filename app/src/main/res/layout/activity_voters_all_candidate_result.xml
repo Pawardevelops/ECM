@@ -69,10 +69,10 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/secondary"
             android:padding="16dp"
             android:layout_marginBottom="8dp"
             android:layout_gravity="center"
+            style="@style/gray_border_input_fields"
             >
 
             <ImageView

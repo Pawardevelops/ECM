@@ -67,7 +67,7 @@
                 android:layout_marginTop="30dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:text="@string/welcome_back" />
+                android:text="welcome voter" />
 
             <TextView
                 android:id="@+id/candidate_create_account_text"
@@ -118,7 +118,7 @@
                 android:textColor="@color/primary"
                 android:textStyle="normal"
                 android:textSize="20sp"
-                android:text="@string/forgot_password" />
+                android:text="forgot password" />
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -142,7 +142,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:textColor="@color/black"
-                android:text="@string/don_t_have_an_account" />
+                android:text="don't have an account? " />
 
             <TextView
                 android:id="@+id/candidate_login"
