@@ -6,7 +6,10 @@
     android:backgroundTint="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#FFFFFF"
+    android:paddingTop="25dp"
+    >
 
     <LinearLayout
         android:id="@+id/header_title"
