@@ -27,10 +27,10 @@
         <activity android:name=".admindashboard" android:exported="false" />
 
         <!-- Admin Login -->
-        <activity android:name=".adminlogin" android:exported="false" />
+        <activity android:name=".AdminHome" android:exported="false" />
 
         <!-- Admin Signup -->
-        <activity android:name=".adminsignup" android:exported="false" />
+        <activity android:name=".AdminSignin" android:exported="false" />
 
         <!-- Candidate Dashboard -->
         <activity android:name=".candidateDashboard" android:exported="false" />
@@ -60,7 +60,7 @@
         <activity android:name=".voters_all_candidates" android:exported="false" />
 
         <!-- Voters Homepage -->
-        <activity android:name=".voters_homepage" android:exported="false" />
+        <activity android:name=".VotersDashboard" android:exported="false" />
 
         <!-- Voters Login -->
         <activity android:name=".voters_login" android:exported="false" />

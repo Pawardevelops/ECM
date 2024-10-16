@@ -39,6 +39,7 @@
 
             <!-- Profile Button -->
             <LinearLayout
+                android:id="@+id/profileButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:orientation="vertical"
@@ -65,6 +66,7 @@
 
             <!-- Results Button -->
             <LinearLayout
+                android:id="@+id/resultsButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:orientation="vertical"
@@ -92,6 +94,7 @@
 
             <!-- Candidates Button -->
             <LinearLayout
+                android:id="@+id/candidatesButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:orientation="vertical"
@@ -118,6 +121,7 @@
 
             <!-- Help Button -->
             <LinearLayout
+                android:id="@+id/helpButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:orientation="vertical"
