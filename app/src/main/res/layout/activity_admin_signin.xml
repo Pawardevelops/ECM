@@ -60,7 +60,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
+        android:drawableStart="@drawable/email"
+        android:drawablePadding="12dp"
         android:inputType="textEmailAddress"
+        android:padding="12dp"
         style="@style/gray_border_input_fields"
 
         android:layout_marginTop="16dp" />
@@ -71,6 +74,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
+        android:drawableStart="@drawable/password"
+        android:drawablePadding="12dp"
+        android:padding="12dp"
         style="@style/gray_border_input_fields"
 
         android:layout_marginTop="8dp" />
