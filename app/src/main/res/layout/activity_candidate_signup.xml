@@ -149,6 +149,7 @@
                     android:id="@+id/passwordInput"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
+                    android:inputType="textPassword"
                     android:layout_weight="1"
                     style="@style/gray_border_input_fields"
                     android:hint="Password"

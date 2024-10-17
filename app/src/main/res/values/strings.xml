@@ -16,6 +16,7 @@
     <string name="welcome_back">WELCOME BACK</string>
     <string name="forgot_password">forgot password</string>
     <string name="don_t_have_an_account">dont have an account</string>
+    <string name="election_not_yet_started">Election Not Yet Started</string>
 
     <string-array name="department_options">
         <item>Select Department</item>

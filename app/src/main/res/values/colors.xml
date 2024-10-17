@@ -5,5 +5,8 @@
     <color name="primary">#39a7ff</color>
     <color name="secondary">#87c4ff</color>
     <color name="tertiary">#e0f4ff</color>
+    <color name="red">#DF0A0A</color>
+    <color name="lightred">#E88B8B</color>
+    <color name="green">#0C9B07</color>
 
 </resources>

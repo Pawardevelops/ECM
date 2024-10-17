@@ -5,10 +5,9 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#FFFFFF"
     >
-
-
 
     <TextView
         android:id="@+id/appTitle"
@@ -55,6 +54,7 @@
         android:gravity="center"
         android:layout_marginTop="8dp" />
 
+
     <EditText
         android:id="@+id/emailInput"
         android:layout_width="match_parent"
@@ -74,12 +74,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
+        android:inputType="textPassword"
+
         android:drawableStart="@drawable/password"
         android:drawablePadding="12dp"
         android:padding="12dp"
         style="@style/gray_border_input_fields"
 
         android:layout_marginTop="8dp" />
+    <!--
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:passwordToggleEnabled="true"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:drawableStart="@drawable/password"
+            android:drawablePadding="12dp"
+            android:padding="12dp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    -->
+
 
     <!-- Forgot Password -->
     <TextView
