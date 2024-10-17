@@ -13,6 +13,18 @@
         android:theme="@style/Theme.MEC"
         tools:targetApi="31">
         <activity
+            android:name=".andmincandidateApproved"
+            android:exported="false" />
+        <activity
+            android:name=".adminCandidateApproval"
+            android:exported="false" />
+        <activity
+            android:name=".tempo"
+            android:exported="false" />
+        <activity
+            android:name=".votersElectionNotYetStarted"
+            android:exported="false" />
+        <activity
             android:name=".circle_shape"
             android:exported="false" />
         <activity
@@ -32,66 +44,64 @@
             android:exported="false" />
         <activity
             android:name=".adminlogin"
-            android:exported="false" />
-
-        <!-- MainActivity -->
+            android:exported="false" /> <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Admin Dashboard -->
-        <activity android:name=".admindashboard" android:exported="false" />
-
-        <!-- Admin Login -->
-        <activity android:name=".AdminHome" android:exported="false" />
-
-        <!-- Admin Signup -->
-        <activity android:name=".AdminSignin" android:exported="false" />
-
-        <!-- Candidate Dashboard -->
-        <activity android:name=".candidateDashboard" android:exported="false" />
-
-        <!-- Candidate Home Page -->
-        <activity android:name=".CandidateHomePage" android:exported="false" />
-
-        <!-- Candidate Login -->
-        <activity android:name=".candidateLogin" android:exported="false" />
-
-        <!-- Candidate Signup -->
-        <activity android:name=".CandidateSignup" android:exported="false" />
-
-        <!-- Candidate Successfully Registered -->
-        <activity android:name=".CandidateSuccessfullyRegistered" android:exported="false" />
-
-        <!-- Voted Successfully -->
-        <activity android:name=".voted_successfully" android:exported="false" />
-
-        <!-- Voter Registered Successfully -->
-        <activity android:name=".voter_registered_successfully" android:exported="false" />
-
-        <!-- Voters All Candidate Result -->
-        <activity android:name=".voters_allCandidate_result" android:exported="false" />
-
-        <!-- Voters All Candidates -->
-        <activity android:name=".voters_all_candidates" android:exported="false" />
-
-        <!-- Voters Homepage -->
-        <activity android:name=".VotersDashboard" android:exported="false" />
-
-        <!-- Voters Login -->
-        <activity android:name=".voters_login" android:exported="false" />
-
-        <!-- Voters Section Menu Result -->
-        <activity android:name=".voters_section_menu_result" android:exported="false" />
-
-        <!-- Voters Signup -->
-        <activity android:name=".voters_signup" android:exported="false" />
-
+        </activity> <!-- Admin Dashboard -->
+        <activity
+            android:name=".admindashboard"
+            android:exported="false" /> <!-- Admin Login -->
+        <activity
+            android:name=".AdminHome"
+            android:exported="false" /> <!-- Admin Signup -->
+        <activity
+            android:name=".AdminSignin"
+            android:exported="false" /> <!-- Candidate Dashboard -->
+        <activity
+            android:name=".candidateDashboard"
+            android:exported="false" /> <!-- Candidate Home Page -->
+        <activity
+            android:name=".CandidateHomePage"
+            android:exported="false" /> <!-- Candidate Login -->
+        <activity
+            android:name=".candidateLogin"
+            android:exported="false" /> <!-- Candidate Signup -->
+        <activity
+            android:name=".CandidateSignup"
+            android:exported="false" /> <!-- Candidate Successfully Registered -->
+        <activity
+            android:name=".CandidateSuccessfullyRegistered"
+            android:exported="false" /> <!-- Voted Successfully -->
+        <activity
+            android:name=".voted_successfully"
+            android:exported="false" /> <!-- Voter Registered Successfully -->
+        <activity
+            android:name=".voter_registered_successfully"
+            android:exported="false" /> <!-- Voters All Candidate Result -->
+        <activity
+            android:name=".voters_allCandidate_result"
+            android:exported="false" /> <!-- Voters All Candidates -->
+        <activity
+            android:name=".voters_all_candidates"
+            android:exported="false" /> <!-- Voters Homepage -->
+        <activity
+            android:name=".VotersDashboard"
+            android:exported="false" /> <!-- Voters Login -->
+        <activity
+            android:name=".voters_login"
+            android:exported="false" /> <!-- Voters Section Menu Result -->
+        <activity
+            android:name=".voters_section_menu_result"
+            android:exported="false" /> <!-- Voters Signup -->
+        <activity
+            android:name=".voters_signup"
+            android:exported="false" />
     </application>
 
 </manifest>

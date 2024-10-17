@@ -72,7 +72,7 @@ public class voters_signup extends AppCompatActivity {
         Toast.makeText(voters_signup.this, "User registered successfully", Toast.LENGTH_SHORT).show();
 
         // Redirect to login screen after successful registration
-        NavigationService.navigateToActivity(voters_signup.this,voters_login.class);
+        NavigationService.navigateToActivity(voters_signup.this,voter_registered_successfully.class);
 
     }
 }
