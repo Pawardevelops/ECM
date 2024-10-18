@@ -1,4 +1,4 @@
-package com.example.mec;
+package com.example.mec.voters;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,25 +6,33 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import com.example.mec.R;
 import com.example.mec.services.NavigationService;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class voters_signup extends AppCompatActivity {
     private EditText firstNameEditText, lastNameEditText, emailEditText, registrationNoEditText, passwordEditText, confirmPasswordEditText;
     private AppCompatButton signupButton;
     private TextView loginTextView;
+
+    // Firebase Authentication and Firestore instances
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_voters_signup);
 
+        // Initialize Firebase Auth and Firestore
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        // Initialize UI elements
         firstNameEditText = findViewById(R.id.candidate_sign_input_fields1).findViewById(R.id.first_name);
         lastNameEditText = findViewById(R.id.candidate_sign_input_fields1).findViewById(R.id.last_name);
         emailEditText = findViewById(R.id.candidate_sign_input_fields2).findViewById(R.id.email);
@@ -51,7 +59,7 @@ public class voters_signup extends AppCompatActivity {
                 } else if (!password.equals(confirmPassword)) {
                     Toast.makeText(voters_signup.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Perform user registration
+                    // Perform user registration with Firebase
                     registerUser(firstName, lastName, email, registrationNo, password);
                 }
             }
@@ -61,18 +69,24 @@ public class voters_signup extends AppCompatActivity {
         loginTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavigationService.navigateToActivity(voters_signup.this,voters_login.class);
+                NavigationService.navigateToActivity(voters_signup.this, voters_login.class);
             }
         });
     }
 
-    // Mock user registration method (replace with real database operations)
+    // Register the user using Firebase Authentication and Firestore
     private void registerUser(String firstName, String lastName, String email, String registrationNo, String password) {
-        // TODO: Implement actual registration logic, e.g., saving to a database or server
-        Toast.makeText(voters_signup.this, "User registered successfully", Toast.LENGTH_SHORT).show();
-
-        // Redirect to login screen after successful registration
-        NavigationService.navigateToActivity(voters_signup.this,voter_registered_successfully.class);
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(voters_signup.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+                        // Redirect to success page
+                        NavigationService.navigateToActivity(voters_signup.this, voter_registered_successfully.class);
+                    } else {
+                        Exception exception = task.getException();
+                        Toast.makeText(voters_signup.this, "Registration failed: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
 
     }
 }

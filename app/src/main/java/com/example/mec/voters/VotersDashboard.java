@@ -1,4 +1,4 @@
-package com.example.mec;
+package com.example.mec.voters;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,10 +8,9 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import com.example.mec.Help;
+import com.example.mec.R;
 import com.example.mec.services.NavigationService;
 
 public class VotersDashboard extends AppCompatActivity {
@@ -59,9 +58,8 @@ public class VotersDashboard extends AppCompatActivity {
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(VotersDashboard.this, "Help page", Toast.LENGTH_SHORT).show();
 
-                //NavigationService.navigateToActivity(VotersDashboard.this,voters_all_candidates.class);
+                NavigationService.navigateToActivity(VotersDashboard.this, Help.class);
 
             }
         });

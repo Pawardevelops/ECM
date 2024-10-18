@@ -7,7 +7,11 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.example.mec.admin.AdminHome;
+import com.example.mec.candidate.CandidateHomePage;
+import com.example.mec.candidate.candidateLogin;
 import com.example.mec.services.NavigationService;
+import com.example.mec.voters.voters_login;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Navigate to CandidateLoginActivity
-                NavigationService.navigateToActivity(MainActivity.this, candidateLogin.class);
+                NavigationService.navigateToActivity(MainActivity.this, CandidateHomePage.class);
 
             }
         });

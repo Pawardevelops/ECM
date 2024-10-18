@@ -8,43 +8,12 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/ecmlogo"
         android:label="@string/app_name"
+
         android:roundIcon="@drawable/ecmlogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.MEC"
         tools:targetApi="31">
-        <activity
-            android:name=".andmincandidateApproved"
-            android:exported="false" />
-        <activity
-            android:name=".adminCandidateApproval"
-            android:exported="false" />
-        <activity
-            android:name=".tempo"
-            android:exported="false" />
-        <activity
-            android:name=".votersElectionNotYetStarted"
-            android:exported="false" />
-        <activity
-            android:name=".circle_shape"
-            android:exported="false" />
-        <activity
-            android:name=".profilec"
-            android:exported="false" />
-        <activity
-            android:name=".candidate_profile"
-            android:exported="false" />
-        <activity
-            android:name=".candidate_dashBoard"
-            android:exported="false" />
-        <activity
-            android:name=".voted_successfully"
-            android:exported="false" />
-        <activity
-            android:name=".adminsignup"
-            android:exported="false" />
-        <activity
-            android:name=".adminlogin"
-            android:exported="false" /> <!-- MainActivity -->
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -55,53 +24,53 @@
             </intent-filter>
         </activity> <!-- Admin Dashboard -->
         <activity
-            android:name=".admindashboard"
+            android:name=".admin.admindashboard"
             android:exported="false" /> <!-- Admin Login -->
         <activity
-            android:name=".AdminHome"
+            android:name=".admin.AdminHome"
             android:exported="false" /> <!-- Admin Signup -->
+
         <activity
-            android:name=".AdminSignin"
-            android:exported="false" /> <!-- Candidate Dashboard -->
-        <activity
-            android:name=".candidateDashboard"
+            android:name=".candidate.candidateDashboard"
             android:exported="false" /> <!-- Candidate Home Page -->
         <activity
-            android:name=".CandidateHomePage"
+            android:name=".candidate.CandidateHomePage"
             android:exported="false" /> <!-- Candidate Login -->
         <activity
-            android:name=".candidateLogin"
+            android:name=".candidate.candidateLogin"
             android:exported="false" /> <!-- Candidate Signup -->
         <activity
-            android:name=".CandidateSignup"
+            android:name=".candidate.CandidateSignup"
             android:exported="false" /> <!-- Candidate Successfully Registered -->
         <activity
-            android:name=".CandidateSuccessfullyRegistered"
+            android:name=".candidate.CandidateSuccessfullyRegistered"
             android:exported="false" /> <!-- Voted Successfully -->
         <activity
-            android:name=".voted_successfully"
+            android:name=".voters.voted_successfully"
             android:exported="false" /> <!-- Voter Registered Successfully -->
         <activity
-            android:name=".voter_registered_successfully"
+            android:name=".voters.voter_registered_successfully"
+
             android:exported="false" /> <!-- Voters All Candidate Result -->
         <activity
-            android:name=".voters_allCandidate_result"
+            android:name=".voters.voters_allCandidate_result"
             android:exported="false" /> <!-- Voters All Candidates -->
         <activity
-            android:name=".voters_all_candidates"
+            android:name=".voters.voters_all_candidates"
             android:exported="false" /> <!-- Voters Homepage -->
         <activity
-            android:name=".VotersDashboard"
+            android:name=".voters.VotersDashboard"
             android:exported="false" /> <!-- Voters Login -->
         <activity
-            android:name=".voters_login"
+            android:name=".voters.voters_login"
             android:exported="false" /> <!-- Voters Section Menu Result -->
         <activity
-            android:name=".voters_section_menu_result"
+            android:name=".voters.voters_section_menu_result"
             android:exported="false" /> <!-- Voters Signup -->
         <activity
-            android:name=".voters_signup"
+            android:name=".voters.voters_signup"
             android:exported="false" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

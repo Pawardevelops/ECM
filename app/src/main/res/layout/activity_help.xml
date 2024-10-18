@@ -1,0 +1,121 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Frequently Asked Questions"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <!-- FAQ Item 1 -->
+        <LinearLayout
+            android:id="@+id/faq_item_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:background="#F5F5F5"
+            android:layout_marginBottom="10dp">
+
+            <!-- Question Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/question_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="What is ECM?"
+                    android:textSize="18sp"
+                    android:textColor="#000000" />
+
+                <ImageView
+                    android:id="@+id/toggle_icon_1"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_add"
+                android:layout_gravity="end"
+                    />
+            </LinearLayout>
+
+            <!-- Answer Section (Hidden Initially) -->
+            <TextView
+                android:id="@+id/answer_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ECM stands for Election Commission of Manipal..."
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:visibility="gone"
+                android:layout_marginTop="8dp" />
+
+        </LinearLayout>
+
+        <!-- FAQ Item 2 -->
+        <LinearLayout
+            android:id="@+id/faq_item_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:background="#F5F5F5"
+            android:layout_marginBottom="10dp">
+
+            <!-- Question Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/question_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="How to register for ECM?"
+                    android:textSize="18sp"
+                    android:textColor="#000000" />
+
+                <ImageView
+                    android:id="@+id/toggle_icon_2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_add"
+                android:layout_gravity="end" />
+            </LinearLayout>
+
+            <!-- Answer Section (Hidden Initially) -->
+            <TextView
+                android:id="@+id/answer_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="You can register by visiting the official ECM website..."
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:visibility="gone"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <!-- More FAQ Items can be added in similar fashion -->
+
+    </LinearLayout>
+</ScrollView>

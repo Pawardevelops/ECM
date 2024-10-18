@@ -1,4 +1,4 @@
-package com.example.mec;
+package com.example.mec.admin;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +7,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.example.mec.R;
 import com.example.mec.services.NavigationService;
 
 public class AdminHome extends AppCompatActivity {
