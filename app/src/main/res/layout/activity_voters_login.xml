@@ -121,7 +121,7 @@
             android:paddingRight="10dp"
             >
             <TextView
-                android:id="@+id/forget_candidate_password"
+                android:id="@+id/forgotPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/primary"
@@ -135,6 +135,13 @@
             android:id="@+id/start"
             style="@style/SolidButton"
             android:text="Login" />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center"/>
+
 
         <LinearLayout
             android:id="@+id/header_title4"

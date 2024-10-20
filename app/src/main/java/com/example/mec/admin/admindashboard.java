@@ -1,5 +1,6 @@
 package com.example.mec.admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -10,14 +11,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.mec.Help;
+import com.example.mec.ProfileActivity;
 import com.example.mec.R;
 import com.example.mec.services.NavigationService;
+import com.example.mec.voters.VotersDashboard;
 import com.example.mec.voters.voters_all_candidates;
 import com.example.mec.voters.voters_section_menu_result;
 
 public class admindashboard extends AppCompatActivity {
     private LinearLayout profileButton, resultsButton, candidatesButton, helpButton;
-    private AppCompatButton campaignManagementButton, supporterInteractionButton;
+    private AppCompatButton candidatesForApproval, createElection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +32,17 @@ public class admindashboard extends AppCompatActivity {
         resultsButton = findViewById(R.id.resultsButton);
         candidatesButton = findViewById(R.id.candidatesButton);
         helpButton = findViewById(R.id.helpButton);
-        campaignManagementButton = findViewById(R.id.campaignManagementButton);
-        supporterInteractionButton = findViewById(R.id.supporterInteractionButton);
+        candidatesForApproval = findViewById(R.id.candidatesForApproval);
+        createElection = findViewById(R.id.electionCreate);
 
         // Set click listeners and intents for navigation
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(admindashboard.this, "Profile page", Toast.LENGTH_SHORT).show();
 //                NavigationService.navigateToActivity(FAQActivity.this,);
+                Intent intent = new Intent(admindashboard.this, adminProfile.class);
+                intent.putExtra("db", "Admins"); // Send "candidates" as the value for the "db" key
+                startActivity(intent);
             }
         });
 
@@ -63,21 +68,21 @@ public class admindashboard extends AppCompatActivity {
             }
         });
 
-        campaignManagementButton.setOnClickListener(new View.OnClickListener() {
+        candidatesForApproval.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(admindashboard.this, "campaignManagementButton page", Toast.LENGTH_SHORT).show();
+                NavigationService.navigateToActivity(admindashboard.this, adminCandidateApproval.class);
 
                 //NavigationService.navigateToCampaignManagement(MainActivity.this);
             }
         });
 
-        supporterInteractionButton.setOnClickListener(new View.OnClickListener() {
+        createElection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(admindashboard.this, "campaignManagementButton page", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(admindashboard.this, "campaignManagementButton page", Toast.LENGTH_SHORT).show();
 
-                //NavigationService.navigateToSupporterInteraction(MainActivity.this);
+                NavigationService.navigateToActivity(admindashboard.this, adminCreateElections.class);
             }
         });
 

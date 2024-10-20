@@ -34,7 +34,7 @@ public class AdminHome extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Navigate to SignUpActivity
-                //NavigationService.navigateToActivity(AdminHome.this, SignUpActivity.class);
+                NavigationService.navigateToActivity(AdminHome.this, adminSignup.class);
             }
         });
     }

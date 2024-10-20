@@ -160,15 +160,19 @@
             android:layout_marginBottom="16dp" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/campaignManagementButton"
+            android:id="@+id/candidatesForApproval"
             style="@style/SolidButton"
-            android:text="Campaign management"
+            android:layout_margin="10dp"
+            android:text="Candidates for approval"
             />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/supporterInteractionButton"
-            style="@style/SolidButton"
-            android:text="Supporter Interaction"
+            android:id="@+id/electionCreate"
+            android:text="Create Elections"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            style="@style/gray_border_input_fields_card"
             />
 
 

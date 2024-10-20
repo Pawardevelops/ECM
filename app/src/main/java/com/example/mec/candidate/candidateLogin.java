@@ -1,5 +1,6 @@
 package com.example.mec.candidate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +13,9 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mec.R;
+import com.example.mec.forgotPassword;
 import com.example.mec.services.NavigationService;
+import com.example.mec.services.SharedPreferenceHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -75,10 +78,9 @@ public class candidateLogin extends AppCompatActivity {
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Implement forgot password logic here
-                Toast.makeText(candidateLogin.this, "Forgot password logic here", Toast.LENGTH_SHORT).show();
-                // Example: NavigationService.navigateToActivity(candidateLogin.this, ForgotPasswordActivity.class);
-            }
+                String email1 = emailInput.getText().toString().trim();
+                resetPassword(email1);
+                 }
         });
 
         // Handle the sign-up text click
@@ -122,10 +124,13 @@ public class candidateLogin extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String role = dataSnapshot.child("role").getValue(String.class);
-                    if ("candidate".equals(role)) {
+                    if ("Candidate".equals(role)) {
                         // Navigate to candidate dashboard
                         setLoadingState(false);
                         Toast.makeText(candidateLogin.this, "Login successful", Toast.LENGTH_SHORT).show();
+                        // For example, when an admin logs in:
+                        SharedPreferenceHelper.saveLoginInfo(candidateLogin.this, true, "admin");
+
                         NavigationService.navigateToActivity(candidateLogin.this, candidateDashboard.class);
                     } else {
                         // If not a candidate, show error
@@ -160,4 +165,20 @@ public class candidateLogin extends AppCompatActivity {
             loginButton.setVisibility(View.VISIBLE);
         }
     }
+    private void resetPassword(String email) {
+        if(email == null || email.equals("")) {
+            Toast.makeText(candidateLogin.this, "Please Enter Email!", Toast.LENGTH_SHORT).show();
+            return ;
+        }
+        mAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Intent intent = new Intent(candidateLogin.this, com.example.mec.forgotPassword.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(candidateLogin.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
 }

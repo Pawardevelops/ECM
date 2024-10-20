@@ -43,7 +43,18 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.4.0")) // Firebase BOM for version management
     implementation("com.google.firebase:firebase-auth") // Use BOM for auth
     implementation("com.google.firebase:firebase-firestore") // Use BOM for Firestore
-    implementation("com.google.firebase:firebase-analytics") // If needed
+    implementation("com.google.firebase:firebase-analytics") // If
+    implementation("com.google.firebase:firebase-storage:20.0.1")
+
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+
+    implementation("com.google.android.material:material:1.8.0")
+    implementation ("com.facebook.shimmer:shimmer:0.5.0")
+
+
+
+
 
     // Google Play services
     implementation("com.google.android.gms:play-services-auth:20.2.0")

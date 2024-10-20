@@ -30,4 +30,14 @@
         <item name="android:layout_marginBottom">10dp</item>
 
     </style>
+    <style name="gray_border_input_fields_card">
+        <!-- Applicable to CardView -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/cardview_border</item> <!-- Background with custom border -->
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 </resources>
