@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,7 +32,7 @@ public class CandidateSignup extends AppCompatActivity {
 
     // UI elements
     private EditText firstNameInput, lastNameInput, emailInput, registrationNoInput, passwordInput, confirmPasswordInput, sloganInput;
-    private EditText departmentInput, courseInput, sectionInput, semesterInput;
+    private AutoCompleteTextView departmentInput, courseInput, sectionInput, semesterInput;
     private Button signUpButton;
     private TextView alreadyHaveAccount;
     private ImageView profileImageView;
@@ -60,13 +62,19 @@ public class CandidateSignup extends AppCompatActivity {
         passwordInput = findViewById(R.id.password);
         confirmPasswordInput = findViewById(R.id.confirm_password);
         sloganInput = findViewById(R.id.slogan);
+
+        // Initialize Material AutoCompleteTextView
         departmentInput = findViewById(R.id.department);
         courseInput = findViewById(R.id.course);
         sectionInput = findViewById(R.id.section);
         semesterInput = findViewById(R.id.semester);
+
         signUpButton = findViewById(R.id.candidateSignUp);
         alreadyHaveAccount = findViewById(R.id.candidate_login);
         profileImageView = findViewById(R.id.profile_image);
+
+        // Populate the AutoCompleteTextViews with data
+        setUpDropdowns();
 
         // Set up click listener for sign-up button
         signUpButton.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +118,25 @@ public class CandidateSignup extends AppCompatActivity {
         });
     }
 
+    // Set up dropdown data for AutoCompleteTextView
+    private void setUpDropdowns() {
+        // Populate department dropdown
+        ArrayAdapter<CharSequence> departmentAdapter = ArrayAdapter.createFromResource(this, R.array.departments, android.R.layout.simple_dropdown_item_1line);
+        departmentInput.setAdapter(departmentAdapter);
+
+        // Populate course dropdown
+        ArrayAdapter<CharSequence> courseAdapter = ArrayAdapter.createFromResource(this, R.array.courses, android.R.layout.simple_dropdown_item_1line);
+        courseInput.setAdapter(courseAdapter);
+
+        // Populate section dropdown
+        ArrayAdapter<CharSequence> sectionAdapter = ArrayAdapter.createFromResource(this, R.array.sections, android.R.layout.simple_dropdown_item_1line);
+        sectionInput.setAdapter(sectionAdapter);
+
+        // Populate semester dropdown
+        ArrayAdapter<CharSequence> semesterAdapter = ArrayAdapter.createFromResource(this, R.array.semesters, android.R.layout.simple_dropdown_item_1line);
+        semesterInput.setAdapter(semesterAdapter);
+    }
+
     // Open file chooser for image selection
     private void openFileChooser() {
         Intent intent = new Intent();
@@ -130,6 +157,7 @@ public class CandidateSignup extends AppCompatActivity {
     // Validate all inputs
     private boolean validateInputs(String firstName, String lastName, String email, String registrationNo, String password, String confirmPassword, String slogan,
                                    String department, String course, String section, String semester) {
+        // Validate EditText inputs
         if (firstName.isEmpty()) {
             firstNameInput.setError("First name is required");
             return false;
@@ -158,22 +186,25 @@ public class CandidateSignup extends AppCompatActivity {
             sloganInput.setError("Slogan is required");
             return false;
         }
+
+        // Validate AutoCompleteTextView selections
         if (department.isEmpty()) {
-            departmentInput.setError("Department is required");
+            Toast.makeText(this, "Please select a department", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (course.isEmpty()) {
-            courseInput.setError("Course is required");
+            Toast.makeText(this, "Please select a course", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (section.isEmpty()) {
-            sectionInput.setError("Section is required");
+            Toast.makeText(this, "Please select a section", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (semester.isEmpty()) {
-            semesterInput.setError("Semester is required");
+            Toast.makeText(this, "Please select a semester", Toast.LENGTH_SHORT).show();
             return false;
         }
+
         return true;
     }
 
