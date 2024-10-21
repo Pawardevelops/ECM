@@ -27,6 +27,8 @@ public class voterCandidateSelection extends AppCompatActivity {
     private LinearLayout candidatesContainer;
     private DatabaseReference candidatesRef;
     private String section;
+    private String department;
+    private String electionId;  // Adding electionId for passing along with candidate ID
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,31 +37,34 @@ public class voterCandidateSelection extends AppCompatActivity {
 
         candidatesContainer = findViewById(R.id.candidates_container); // Container to add candidate views dynamically
 
-        // Get the section passed from the previous activity
+        // Get the section, department, and electionId passed from the previous activity
         section = getIntent().getStringExtra("SECTION");
+        department = getIntent().getStringExtra("DEPARTMENT");
+        electionId = getIntent().getStringExtra("ELECTION_ID");  // Receiving election ID as well
 
-        if (section == null) {
-            Toast.makeText(this, "No section found", Toast.LENGTH_SHORT).show();
-            finish(); // Close the activity if no section is found
+        if (section == null || department == null || electionId == null) {
+            Toast.makeText(this, "No section, department, or election ID found", Toast.LENGTH_SHORT).show();
+            finish(); // Close the activity if no section, department, or election ID is found
         }
 
         // Initialize Firebase Database reference
         candidatesRef = FirebaseDatabase.getInstance().getReference("candidates");
 
-        // Fetch and display candidates from the specified section
-        fetchCandidatesBySection(section);
+        // Fetch and display candidates from the specified section and department
+        fetchCandidatesBySectionAndDepartment(section, department);
     }
 
-    private void fetchCandidatesBySection(String section) {
+    private void fetchCandidatesBySectionAndDepartment(String section, String department) {
         // Query candidates where the section matches
         Query query = candidatesRef.orderByChild("section").equalTo(section);
+
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 candidatesContainer.removeAllViews(); // Clear any previous candidates
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Candidate candidate = snapshot.getValue(Candidate.class);
-                    if (candidate != null) {
+                    if (candidate != null && candidate.getDepartment().equals(department)) { // Filter by department
                         addCandidateToLayout(candidate, snapshot.getKey()); // Pass the candidate UID
                     }
                 }
@@ -80,6 +85,7 @@ public class voterCandidateSelection extends AppCompatActivity {
         TextView candidateSection = candidateView.findViewById(R.id.candidate_section);
         ImageView candidateImage = candidateView.findViewById(R.id.candidate_image);
 
+        // Set candidate details
         candidateName.setText(candidate.getFirstName() + " " + candidate.getLastName());
         candidateSection.setText(candidate.getSection());
 
@@ -97,12 +103,14 @@ public class voterCandidateSelection extends AppCompatActivity {
 
         // Set an OnClickListener for the candidate card
         candidateView.setOnClickListener(view -> {
-            // Navigate to electedCandidate activity
+            // Navigate to voterSelectedCandidate activity
             Intent intent = new Intent(voterCandidateSelection.this, voterSelectedCandidate.class);
-            intent.putExtra("CANDIDATE_UID", candidateUid); // Pass the candidate's UID
+            intent.putExtra("CANDIDATE_UID", candidateUid);  // Pass the candidate's UID
+            intent.putExtra("ELECTION_ID", electionId);      // Pass the election ID
             startActivity(intent);
         });
 
-        candidatesContainer.addView(candidateView); // Add the inflated view to the container
+        // Add the inflated view to the container
+        candidatesContainer.addView(candidateView);
     }
 }

@@ -1,4 +1,5 @@
 package com.example.mec.voters;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
@@ -81,8 +82,10 @@ public class VotersDashboard extends AppCompatActivity {
 
                 for (DataSnapshot electionSnapshot : dataSnapshot.getChildren()) {
                     // Extract election data
+                    String electionId = electionSnapshot.getKey();  // Assuming the election ID is the key
                     String electionTitle = electionSnapshot.child("title").getValue(String.class);
                     String section = electionSnapshot.child("section").getValue(String.class);
+                    String department = electionSnapshot.child("department").getValue(String.class);  // Extract department
 
                     // Dynamically create buttons for each election using a styled context
                     ContextThemeWrapper newContext = new ContextThemeWrapper(VotersDashboard.this, R.style.SolidButton);
@@ -102,8 +105,11 @@ public class VotersDashboard extends AppCompatActivity {
 
                     // Set click listener for each button
                     electionButton.setOnClickListener(v -> {
+                        // Create an intent to pass section, department, and election ID to voterCandidateSelection activity
                         Intent intent = new Intent(VotersDashboard.this, voterCandidateSelection.class);
-                        intent.putExtra("SECTION", section);  // Pass the section from the database
+                        intent.putExtra("SECTION", section);         // Pass section
+                        intent.putExtra("DEPARTMENT", department);   // Pass department
+                        intent.putExtra("ELECTION_ID", electionId);  // Pass election ID
                         startActivity(intent);
                     });
 

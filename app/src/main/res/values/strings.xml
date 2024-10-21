@@ -27,10 +27,12 @@
     </string-array>
 
     <string-array name="courses">
+        <item>MCA</item>
         <item>B.Tech</item>
         <item>B.Sc</item>
         <item>BBA</item>
         <item>MBA</item>
+
     </string-array>
 
     <string-array name="sections">

@@ -311,7 +311,7 @@
 
             <!-- Vote Button -->
             <Button
-                android:id="@+id/logoutButton"
+                android:id="@+id/voteButton"
                 android:layout_width="206dp"
                 android:layout_height="52dp"
                 android:backgroundTint="@color/primary"
