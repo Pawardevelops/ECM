@@ -218,7 +218,7 @@ public class CandidateSignup extends AppCompatActivity {
     // Save candidate data to Firebase Realtime Database
     private void saveCandidateData(String userId, String firstName, String lastName, String email, String registrationNo, String slogan,
                                    String imageUrl, String department, String course, String section, String semester) {
-        Candidate candidate = new Candidate(firstName, lastName, email, registrationNo, slogan, imageUrl, department, course, section.toUpperCase(), semester, "Candidate");
+        Candidate candidate = new Candidate(firstName, lastName, email, registrationNo, slogan, imageUrl, department, course, section.toUpperCase(), semester, "Candidate",userId);
 
         dbRef.child(userId).setValue(candidate)
                 .addOnSuccessListener(aVoid -> {

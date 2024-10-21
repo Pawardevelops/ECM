@@ -82,7 +82,7 @@ public class admindashboard extends AppCompatActivity {
             public void onClick(View v) {
 //                Toast.makeText(admindashboard.this, "campaignManagementButton page", Toast.LENGTH_SHORT).show();
 
-                NavigationService.navigateToActivity(admindashboard.this, adminCreateElections.class);
+                NavigationService.navigateToActivity(admindashboard.this, adminElections.class);
             }
         });
 

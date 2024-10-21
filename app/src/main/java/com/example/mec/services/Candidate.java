@@ -1,12 +1,14 @@
 package com.example.mec.services;
 
 public class Candidate {
+    public String uid; // Add this field for UID
     public String firstName, lastName, email, registrationNo, slogan, imageUrl;
-    public String department, course, section, semester, status="Pending";
+    public String department, course, section, semester, status = "Pending";
     public String userType;
 
-    public Candidate(String firstName, String lastName, String email, String registrationNo, String slogan, String imageUrl,
+    public Candidate(String uid, String firstName, String lastName, String email, String registrationNo, String slogan, String imageUrl,
                      String department, String course, String section, String semester, String userType, String status) {
+        this.uid = uid; // Initialize UID
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -18,10 +20,12 @@ public class Candidate {
         this.section = section;
         this.semester = semester;
         this.userType = userType;
-        this.status=status;
+        this.status = status;
     }
-    public Candidate(String firstName, String lastName, String email, String registrationNo, String slogan, String imageUrl,
+
+    public Candidate(String uid, String firstName, String lastName, String email, String registrationNo, String slogan, String imageUrl,
                      String department, String course, String section, String semester, String userType) {
+        this.uid = uid; // Initialize UID
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -34,12 +38,63 @@ public class Candidate {
         this.semester = semester;
         this.userType = userType;
     }
-    public Candidate() {
 
+    public Candidate() {
+        // Default constructor required for calls to DataSnapshot.getValue(Candidate.class)
     }
 
+    // Getter and Setter for UID
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    // Other getters and setters
     public String getFirstName() {
         return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getRegistrationNo() {
+        return registrationNo;
+    }
+
+    public String getSlogan() {
+        return slogan;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public String getCourse() {
+        return course;
+    }
+
+    public String getSection() {
+        return section;
+    }
+
+    public String getSemester() {
+        return semester;
+    }
+
+    public String getUserType() {
+        return userType;
     }
 
     public String getStatus() {
@@ -54,80 +109,40 @@ public class Candidate {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getRegistrationNo() {
-        return registrationNo;
-    }
-
     public void setRegistrationNo(String registrationNo) {
         this.registrationNo = registrationNo;
-    }
-
-    public String getSlogan() {
-        return slogan;
     }
 
     public void setSlogan(String slogan) {
         this.slogan = slogan;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public String getDepartment() {
-        return department;
     }
 
     public void setDepartment(String department) {
         this.department = department;
     }
 
-    public String getCourse() {
-        return course;
-    }
-
     public void setCourse(String course) {
         this.course = course;
-    }
-
-    public String getSection() {
-        return section;
     }
 
     public void setSection(String section) {
         this.section = section;
     }
 
-    public String getSemester() {
-        return semester;
-    }
-
     public void setSemester(String semester) {
         this.semester = semester;
-    }
-
-    public String getUserType() {
-        return userType;
     }
 
     public void setUserType(String userType) {

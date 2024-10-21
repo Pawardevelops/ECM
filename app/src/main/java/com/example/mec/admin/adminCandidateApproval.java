@@ -9,22 +9,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.mec.R;
 import com.example.mec.services.Candidate;
-import com.example.mec.voters.voters_all_candidates;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class adminCandidateApproval extends AppCompatActivity {
     private LinearLayout candidatesContainer; // This will hold the candidates
@@ -49,12 +47,33 @@ public class adminCandidateApproval extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 candidatesContainer.removeAllViews(); // Clear existing views
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    // Assuming your Voter model has the appropriate fields
-                    Candidate candidate = snapshot.getValue(Candidate.class);
-                        addCandidateToLayout(candidate, snapshot.getKey()); // Pass the UID to the method
 
+                List<Candidate> pendingCandidates = new ArrayList<>();
+                List<Candidate> approvedCandidates = new ArrayList<>();
+                List<Candidate> canceledCandidates = new ArrayList<>();
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Candidate candidate = snapshot.getValue(Candidate.class);
+                    if (candidate != null) {
+                        candidate.setUid(snapshot.getKey()); // Set UID from the snapshot key
+                        switch (candidate.getStatus()) {
+                            case "Pending":
+                                pendingCandidates.add(candidate);
+                                break;
+                            case "approved":
+                                approvedCandidates.add(candidate);
+                                break;
+                            case "cancelled":
+                                canceledCandidates.add(candidate);
+                                break;
+                        }
+                    }
                 }
+
+                // Display each group of candidates
+                displayCandidates(pendingCandidates, "Pending Candidates");
+                displayCandidates(approvedCandidates, "Approved Candidates");
+                displayCandidates(canceledCandidates, "Cancelled Candidates");
             }
 
             @Override
@@ -64,7 +83,22 @@ public class adminCandidateApproval extends AppCompatActivity {
         });
     }
 
-    private void addCandidateToLayout(Candidate candidate, String candidateUid) {
+    private void displayCandidates(List<Candidate> candidates, String title) {
+        if (!candidates.isEmpty()) {
+            // Add a title for the group
+            TextView groupTitle = new TextView(this);
+            groupTitle.setText(title);
+            groupTitle.setTextSize(18);
+            groupTitle.setTextColor(getResources().getColor(R.color.primary)); // Change this to your color resource
+            candidatesContainer.addView(groupTitle);
+
+            for (Candidate candidate : candidates) {
+                addCandidateToLayout(candidate);
+            }
+        }
+    }
+
+    private void addCandidateToLayout(Candidate candidate) {
         LayoutInflater inflater = LayoutInflater.from(this);
         View candidateView = inflater.inflate(R.layout.candidate_items, candidatesContainer, false);
 
@@ -76,24 +110,23 @@ public class adminCandidateApproval extends AppCompatActivity {
         candidateSection.setText(candidate.getSection());
 
         // Load the candidate image using Glide
-        String imageUrl = candidate.getImageUrl(); // Get the image URL
+        String imageUrl = candidate.getImageUrl();
         if (imageUrl != null && !imageUrl.isEmpty()) {
             Glide.with(this)
                     .load(imageUrl)
-                    .placeholder(R.drawable.profile) // Placeholder image
-                    .error(R.drawable.profile) // Error image if loading fails
+                    .placeholder(R.drawable.profile)
+                    .error(R.drawable.profile)
                     .into(candidateImage);
         } else {
-            candidateImage.setImageResource(R.drawable.profile); // Set a default image if URL is empty
+            candidateImage.setImageResource(R.drawable.profile);
         }
 
         // Set an OnClickListener for the candidate card
         candidateView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Navigate to AdminCandidateApproval activity
                 Intent intent = new Intent(adminCandidateApproval.this, adminCandidateApprove.class);
-                intent.putExtra("CANDIDATE_UID", candidateUid); // Send the candidate's UID
+                intent.putExtra("CANDIDATE_UID", candidate.getUid()); // Use getUid() to pass the UID
                 startActivity(intent);
             }
         });
