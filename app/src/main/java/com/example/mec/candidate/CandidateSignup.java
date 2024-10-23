@@ -9,7 +9,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +20,6 @@ import com.example.mec.R;
 import com.example.mec.services.Candidate;
 import com.example.mec.services.NavigationService;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -39,7 +37,6 @@ public class CandidateSignup extends AppCompatActivity {
     private TextView alreadyHaveAccount;
     private ImageView profileImageView;
     private Uri imageUri;  // Store the selected image URI
-    private ProgressBar progressBar;  // Add the ProgressBar reference
 
     // Firebase instances
     private FirebaseAuth mAuth;
@@ -65,119 +62,41 @@ public class CandidateSignup extends AppCompatActivity {
         passwordInput = findViewById(R.id.password);
         confirmPasswordInput = findViewById(R.id.confirm_password);
         sloganInput = findViewById(R.id.slogan);
+
+        // Initialize AutoCompleteTextViews
         departmentInput = findViewById(R.id.department);
         courseInput = findViewById(R.id.course);
         sectionInput = findViewById(R.id.section);
         semesterInput = findViewById(R.id.semester);
+
         signUpButton = findViewById(R.id.candidateSignUp);
         alreadyHaveAccount = findViewById(R.id.candidate_login);
         profileImageView = findViewById(R.id.profile_image);
-        progressBar = findViewById(R.id.progressBar);  // Initialize the ProgressBar
 
-        // Restore password validation logic
-        passwordInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {  // Validate when user moves away from password field
-                    String password = passwordInput.getText().toString();
-
-                    // Check if the password is at least 8 characters long
-                    if (password.length() < 8) {
-                        passwordInput.setError("Password must be at least 8 characters long");
-                    }
-                    // Check if the password contains at least one uppercase letter, one lowercase letter, one number, and one special character
-                    else if (!password.matches(".*[A-Z].*")) {
-                        passwordInput.setError("Password must contain at least one uppercase letter");
-                    } else if (!password.matches(".*[a-z].*")) {
-                        passwordInput.setError("Password must contain at least one lowercase letter");
-                    } else if (!password.matches(".*\\d.*")) {
-                        passwordInput.setError("Password must contain at least one number");
-                    } else if (!password.matches(".*[@#\\$%^&+=!].*")) {
-                        passwordInput.setError("Password must contain at least one special character (@, #, $, etc.)");
-                    } else {
-                        passwordInput.setError(null);  // Clear the error if all validations pass
-                    }
-                }
-            }
-        });
-
-        // Restore registration number validation logic
-        registrationNoInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {  // Validate when user moves away from registration number field
-                    String registrationNo = registrationNoInput.getText().toString();
-
-                    // Check if the registration number is exactly 9 digits
-                    if (registrationNo.length() != 9 || !registrationNo.matches("\\d{9}")) {
-                        registrationNoInput.setError("Registration number must be exactly 9 digits");
-                    } else {
-                        registrationNoInput.setError(null);  // Clear the error if validation passes
-                    }
-                }
-            }
-        });
-
-        // Populate the AutoCompleteTextViews with data
+        // Populate dropdowns
         setUpDropdowns();
 
-        // Set up click listener for sign-up button
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Get input values
-                String firstName = firstNameInput.getText().toString();
-                String lastName = lastNameInput.getText().toString();
-                String email = emailInput.getText().toString();
-                String registrationNo = registrationNoInput.getText().toString();
-                String password = passwordInput.getText().toString();
-                String confirmPassword = confirmPasswordInput.getText().toString();
-                String slogan = sloganInput.getText().toString();
-                String department = departmentInput.getText().toString();
-                String course = courseInput.getText().toString();
-                String section = sectionInput.getText().toString();
-                String semester = semesterInput.getText().toString();
+        // Set up sign-up button listener
+        signUpButton.setOnClickListener(this::onSignUpButtonClick);
 
-                // Validate inputs
-                if (validateInputs(firstName, lastName, email, registrationNo, password, confirmPassword, slogan, department, course, section, semester)) {
-                    setLoadingState(true);  // Show loading state
-                    registerCandidate(firstName, lastName, email, registrationNo, password, slogan, department, course, section, semester);
-                }
-            }
-        });
+        // Set up "Already have an account?" listener
+        alreadyHaveAccount.setOnClickListener(v -> NavigationService.navigateToActivity(CandidateSignup.this, candidateLogin.class));
 
-        // Set click listener for "Already have an account?" text
-        alreadyHaveAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavigationService.navigateToActivity(CandidateSignup.this, candidateLogin.class);
-            }
-        });
-
-        // Set click listener for profile image selection
-        profileImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openFileChooser();
-            }
-        });
+        // Set up profile image selection
+        profileImageView.setOnClickListener(v -> openFileChooser());
     }
 
     // Set up dropdown data for AutoCompleteTextView
     private void setUpDropdowns() {
-        // Populate department dropdown
         ArrayAdapter<CharSequence> departmentAdapter = ArrayAdapter.createFromResource(this, R.array.departments, android.R.layout.simple_dropdown_item_1line);
         departmentInput.setAdapter(departmentAdapter);
 
-        // Populate course dropdown
         ArrayAdapter<CharSequence> courseAdapter = ArrayAdapter.createFromResource(this, R.array.courses, android.R.layout.simple_dropdown_item_1line);
         courseInput.setAdapter(courseAdapter);
 
-        // Populate section dropdown
         ArrayAdapter<CharSequence> sectionAdapter = ArrayAdapter.createFromResource(this, R.array.sections, android.R.layout.simple_dropdown_item_1line);
         sectionInput.setAdapter(sectionAdapter);
 
-        // Populate semester dropdown
         ArrayAdapter<CharSequence> semesterAdapter = ArrayAdapter.createFromResource(this, R.array.semesters, android.R.layout.simple_dropdown_item_1line);
         semesterInput.setAdapter(semesterAdapter);
     }
@@ -199,10 +118,31 @@ public class CandidateSignup extends AppCompatActivity {
         }
     }
 
+    // Handle sign-up button click
+    private void onSignUpButtonClick(View v) {
+        String firstName = firstNameInput.getText().toString().trim();
+        String lastName = lastNameInput.getText().toString().trim();
+        String email = emailInput.getText().toString().trim();
+        String registrationNo = registrationNoInput.getText().toString().trim();
+        String password = passwordInput.getText().toString().trim();
+        String confirmPassword = confirmPasswordInput.getText().toString().trim();
+        String slogan = sloganInput.getText().toString().trim();
+        String department = departmentInput.getText().toString().trim();
+        String course = courseInput.getText().toString().trim();
+        String section = sectionInput.getText().toString().trim();
+        String semester = semesterInput.getText().toString().trim();
+
+        // Validate inputs
+        if (validateInputs(firstName, lastName, email, registrationNo, password, confirmPassword, slogan, department, course, section, semester)) {
+            setLoadingState(true);
+            registerCandidate(firstName, lastName, email, registrationNo, password, slogan, department, course, section, semester);
+        }
+    }
+
     // Validate all inputs
-    private boolean validateInputs(String firstName, String lastName, String email, String registrationNo, String password, String confirmPassword, String slogan,
-                                   String department, String course, String section, String semester) {
-        // Validate EditText inputs
+    private boolean validateInputs(String firstName, String lastName, String email, String registrationNo, String password,
+                                   String confirmPassword, String slogan, String department, String course,
+                                   String section, String semester) {
         if (firstName.isEmpty()) {
             firstNameInput.setError("First name is required");
             return false;
@@ -213,10 +153,6 @@ public class CandidateSignup extends AppCompatActivity {
         }
         if (email.isEmpty()) {
             emailInput.setError("Email is required");
-            return false;
-        }
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailInput.setError("Invalid email format");
             return false;
         }
         if (registrationNo.isEmpty()) {
@@ -235,8 +171,6 @@ public class CandidateSignup extends AppCompatActivity {
             sloganInput.setError("Slogan is required");
             return false;
         }
-
-        // Validate AutoCompleteTextView selections
         if (department.isEmpty()) {
             Toast.makeText(this, "Please select a department", Toast.LENGTH_SHORT).show();
             return false;
@@ -253,20 +187,18 @@ public class CandidateSignup extends AppCompatActivity {
             Toast.makeText(this, "Please select a semester", Toast.LENGTH_SHORT).show();
             return false;
         }
-
-        return true;  // All inputs are valid
+        return true;
     }
 
     // Register candidate using Firebase Authentication and Realtime Database
-    private void registerCandidate(String firstName, String lastName, String email, String registrationNo, String password, String slogan,
-                                   String department, String course, String section, String semester) {
+    private void registerCandidate(String firstName, String lastName, String email, String registrationNo, String password,
+                                   String slogan, String department, String course, String section, String semester) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser firebaseUser = mAuth.getCurrentUser();
                         if (firebaseUser != null) {
                             String userId = firebaseUser.getUid();
-
                             if (imageUri != null) {
                                 uploadProfileImage(userId, firstName, lastName, email, registrationNo, slogan, department, course, section, semester);
                             } else {
@@ -274,15 +206,8 @@ public class CandidateSignup extends AppCompatActivity {
                             }
                         }
                     } else {
-                        // Handle specific Firebase exceptions
-                        if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                            // Email already registered
-                            Toast.makeText(CandidateSignup.this, "Email already registered.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Generic error message
-                            Toast.makeText(CandidateSignup.this, "Sign-up failed. Please try again.", Toast.LENGTH_SHORT).show();
-                        }
-                        setLoadingState(false); // Ensure to revert the loading state
+                        Toast.makeText(CandidateSignup.this, "Sign-up failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        setLoadingState(false);
                     }
                 });
     }
@@ -305,7 +230,23 @@ public class CandidateSignup extends AppCompatActivity {
     // Save candidate data to Firebase Realtime Database
     private void saveCandidateData(String userId, String firstName, String lastName, String email, String registrationNo, String slogan,
                                    String imageUrl, String department, String course, String section, String semester) {
-        Candidate candidate = new Candidate(firstName, lastName, email, registrationNo, slogan, imageUrl, department, course, section.toUpperCase(), semester, "Candidate",userId);
+        // Assign default values to avoid nulls
+        Candidate candidate = new Candidate(
+                userId,
+                firstName != null ? firstName : "",
+                lastName != null ? lastName : "",
+                email != null ? email : "",
+                registrationNo != null ? registrationNo : "",
+                slogan != null ? slogan : "",
+                imageUrl != null ? imageUrl : "",
+                department != null ? department : "",
+                course != null ? course : "",
+                section != null ? section : "",
+                semester != null ? semester : "",
+                "Candidate",
+                0
+
+        );
 
         dbRef.child(userId).setValue(candidate)
                 .addOnSuccessListener(aVoid -> {
@@ -320,14 +261,7 @@ public class CandidateSignup extends AppCompatActivity {
 
     // Set loading state for the sign-up button
     private void setLoadingState(boolean isLoading) {
-        if (isLoading) {
-            progressBar.setVisibility(View.VISIBLE);  // Show the ProgressBar
-            signUpButton.setEnabled(false);
-            signUpButton.setText("Signing Up...");
-        } else {
-            progressBar.setVisibility(View.GONE);  // Hide the ProgressBar
-            signUpButton.setEnabled(true);
-            signUpButton.setText("Sign Up");
-        }
+        signUpButton.setEnabled(!isLoading);
+        signUpButton.setText(isLoading ? "Signing Up..." : "Sign Up");
     }
 }

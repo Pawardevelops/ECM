@@ -5,9 +5,10 @@ public class Candidate {
     public String firstName, lastName, email, registrationNo, slogan, imageUrl;
     public String department, course, section, semester, status = "Pending";
     public String userType;
+    public int voteCount;
 
     public Candidate(String uid, String firstName, String lastName, String email, String registrationNo, String slogan, String imageUrl,
-                     String department, String course, String section, String semester, String userType, String status) {
+                     String department, String course, String section, String semester, String userType, String status,int votes) {
         this.uid = uid; // Initialize UID
         this.firstName = firstName;
         this.lastName = lastName;
@@ -21,6 +22,8 @@ public class Candidate {
         this.semester = semester;
         this.userType = userType;
         this.status = status;
+        this.voteCount = votes;
+
     }
 
     public Candidate(String uid, String firstName, String lastName, String email, String registrationNo, String slogan, String imageUrl,
@@ -43,10 +46,40 @@ public class Candidate {
         // Default constructor required for calls to DataSnapshot.getValue(Candidate.class)
     }
 
+
+
+
+    public Candidate(String uid, String firstName, String lastName, String email, String registrationNo, String slogan, String imageUrl, String department, String course, String section, String semester, String userType, int votes) {
+        this.voteCount = votes;
+        this.userType = userType;
+        this.status = status;
+        this.semester = semester;
+        this.section = section;
+        this.course = course;
+        this.department = department;
+        this.imageUrl = imageUrl;
+        this.slogan = slogan;
+        this.registrationNo = registrationNo;
+        this.email = email;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.uid = uid;
+
+    }
+
     // Getter and Setter for UID
     public String getUid() {
         return uid;
     }
+
+    public int getVotes() {
+        return voteCount;
+    }
+
+    public void setVotes(int votes) {
+        this.voteCount = votes;
+    }
+
 
     public void setUid(String uid) {
         this.uid = uid;
