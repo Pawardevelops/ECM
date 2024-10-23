@@ -9,6 +9,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import com.example.mec.R;
 import com.example.mec.services.Candidate;
 import com.example.mec.services.NavigationService;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -37,6 +39,7 @@ public class CandidateSignup extends AppCompatActivity {
     private TextView alreadyHaveAccount;
     private ImageView profileImageView;
     private Uri imageUri;  // Store the selected image URI
+    private ProgressBar progressBar;  // Add the ProgressBar reference
 
     // Firebase instances
     private FirebaseAuth mAuth;
@@ -62,16 +65,58 @@ public class CandidateSignup extends AppCompatActivity {
         passwordInput = findViewById(R.id.password);
         confirmPasswordInput = findViewById(R.id.confirm_password);
         sloganInput = findViewById(R.id.slogan);
-
-        // Initialize Material AutoCompleteTextView
         departmentInput = findViewById(R.id.department);
         courseInput = findViewById(R.id.course);
         sectionInput = findViewById(R.id.section);
         semesterInput = findViewById(R.id.semester);
-
         signUpButton = findViewById(R.id.candidateSignUp);
         alreadyHaveAccount = findViewById(R.id.candidate_login);
         profileImageView = findViewById(R.id.profile_image);
+        progressBar = findViewById(R.id.progressBar);  // Initialize the ProgressBar
+
+        // Restore password validation logic
+        passwordInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {  // Validate when user moves away from password field
+                    String password = passwordInput.getText().toString();
+
+                    // Check if the password is at least 8 characters long
+                    if (password.length() < 8) {
+                        passwordInput.setError("Password must be at least 8 characters long");
+                    }
+                    // Check if the password contains at least one uppercase letter, one lowercase letter, one number, and one special character
+                    else if (!password.matches(".*[A-Z].*")) {
+                        passwordInput.setError("Password must contain at least one uppercase letter");
+                    } else if (!password.matches(".*[a-z].*")) {
+                        passwordInput.setError("Password must contain at least one lowercase letter");
+                    } else if (!password.matches(".*\\d.*")) {
+                        passwordInput.setError("Password must contain at least one number");
+                    } else if (!password.matches(".*[@#\\$%^&+=!].*")) {
+                        passwordInput.setError("Password must contain at least one special character (@, #, $, etc.)");
+                    } else {
+                        passwordInput.setError(null);  // Clear the error if all validations pass
+                    }
+                }
+            }
+        });
+
+        // Restore registration number validation logic
+        registrationNoInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {  // Validate when user moves away from registration number field
+                    String registrationNo = registrationNoInput.getText().toString();
+
+                    // Check if the registration number is exactly 9 digits
+                    if (registrationNo.length() != 9 || !registrationNo.matches("\\d{9}")) {
+                        registrationNoInput.setError("Registration number must be exactly 9 digits");
+                    } else {
+                        registrationNoInput.setError(null);  // Clear the error if validation passes
+                    }
+                }
+            }
+        });
 
         // Populate the AutoCompleteTextViews with data
         setUpDropdowns();
@@ -95,7 +140,7 @@ public class CandidateSignup extends AppCompatActivity {
 
                 // Validate inputs
                 if (validateInputs(firstName, lastName, email, registrationNo, password, confirmPassword, slogan, department, course, section, semester)) {
-                    setLoadingState(true);
+                    setLoadingState(true);  // Show loading state
                     registerCandidate(firstName, lastName, email, registrationNo, password, slogan, department, course, section, semester);
                 }
             }
@@ -170,6 +215,10 @@ public class CandidateSignup extends AppCompatActivity {
             emailInput.setError("Email is required");
             return false;
         }
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailInput.setError("Invalid email format");
+            return false;
+        }
         if (registrationNo.isEmpty()) {
             registrationNoInput.setError("Registration number is required");
             return false;
@@ -205,7 +254,7 @@ public class CandidateSignup extends AppCompatActivity {
             return false;
         }
 
-        return true;
+        return true;  // All inputs are valid
     }
 
     // Register candidate using Firebase Authentication and Realtime Database
@@ -225,8 +274,15 @@ public class CandidateSignup extends AppCompatActivity {
                             }
                         }
                     } else {
-                        Toast.makeText(CandidateSignup.this, "Sign-up failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        setLoadingState(false);
+                        // Handle specific Firebase exceptions
+                        if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                            // Email already registered
+                            Toast.makeText(CandidateSignup.this, "Email already registered.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Generic error message
+                            Toast.makeText(CandidateSignup.this, "Sign-up failed. Please try again.", Toast.LENGTH_SHORT).show();
+                        }
+                        setLoadingState(false); // Ensure to revert the loading state
                     }
                 });
     }
@@ -265,9 +321,11 @@ public class CandidateSignup extends AppCompatActivity {
     // Set loading state for the sign-up button
     private void setLoadingState(boolean isLoading) {
         if (isLoading) {
+            progressBar.setVisibility(View.VISIBLE);  // Show the ProgressBar
             signUpButton.setEnabled(false);
             signUpButton.setText("Signing Up...");
         } else {
+            progressBar.setVisibility(View.GONE);  // Hide the ProgressBar
             signUpButton.setEnabled(true);
             signUpButton.setText("Sign Up");
         }
