@@ -1,110 +1,72 @@
 package com.example.mec.voters;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.util.Log;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mec.R;
+import com.example.mec.services.Candidate;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import com.bumptech.glide.Glide;  // Make sure to include Glide for image loading
 
 public class voters_allCandidate_result extends AppCompatActivity {
-    private LinearLayout candidateList;
-    private DatabaseReference candidatesRef, votesRef; // References for candidates and votes
+    private DatabaseReference votesRef, candidatesRef;
     private String electionId; // Store the election ID
-    private int totalVotes = 0; // To track total votes
+    private Set<String> candidateIds; // Store unique candidate IDs from votes
+    private LinearLayout candidateList; // To hold the dynamically added candidate views
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_voters_all_candidate_result);
-
-        // Initialize views
-        candidateList = findViewById(R.id.candidateList);
 
         // Get the election ID from the intent
         electionId = getIntent().getStringExtra("ELECTION_ID");
 
-        // Initialize Firebase references for candidates and votes
-        candidatesRef = FirebaseDatabase.getInstance().getReference("elections").child(electionId).child("candidates");
-        votesRef = FirebaseDatabase.getInstance().getReference("votes").child(electionId);
+        // Initialize Firebase references for votes and candidates
+        votesRef = FirebaseDatabase.getInstance().getReference("votes");
+        candidatesRef = FirebaseDatabase.getInstance().getReference("candidates");
 
-        // Fetch candidates and their corresponding votes
-        fetchCandidates();
+        candidateIds = new HashSet<>(); // Initialize set to store unique candidate IDs
+        candidateList = findViewById(R.id.candidateList); // Find the candidate list layout
+
+        // Fetch votes and log candidate names
+        fetchVotes();
     }
 
-    // Method to fetch candidates and votes from Firebase
-    private void fetchCandidates() {
-        candidatesRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot candidatesSnapshot) {
-                if (candidatesSnapshot.exists()) {
-                    List<Candidate> candidates = new ArrayList<>();
-                    Map<String, Integer> candidateVotesMap = new HashMap<>();
-
-                    // Iterate through each candidate
-                    for (DataSnapshot candidateSnapshot : candidatesSnapshot.getChildren()) {
-                        String candidateId = candidateSnapshot.getKey(); // Get candidate ID
-                        String name = candidateSnapshot.child("name").getValue(String.class);
-                        String section = candidateSnapshot.child("section").getValue(String.class);
-
-                        // Initialize vote count to 0 for this candidate
-                        candidateVotesMap.put(candidateId, 0);
-
-                        candidates.add(new Candidate(candidateId, name, section, 0, 0.0));
-                    }
-
-                    // Fetch votes and update the candidate vote counts
-                    fetchVotes(candidates, candidateVotesMap);
-                } else {
-                    Toast.makeText(voters_allCandidate_result.this, "No candidates found for this election.", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(voters_allCandidate_result.this, "Error fetching candidates: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    // Method to fetch votes and update the vote count for each candidate
-    private void fetchVotes(List<Candidate> candidates, Map<String, Integer> candidateVotesMap) {
+    // Method to fetch votes from Firebase and log matching candidates
+    private void fetchVotes() {
         votesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot votesSnapshot) {
                 if (votesSnapshot.exists()) {
-                    totalVotes = (int) votesSnapshot.getChildrenCount(); // Total number of votes
-
-                    // Iterate through each vote and update vote count for the candidate
                     for (DataSnapshot voteSnapshot : votesSnapshot.getChildren()) {
-                        String candidateId = voteSnapshot.getValue(String.class); // Here we get candidateId directly
+                        // Extracting the fields from each vote
+                        String voteElectionId = voteSnapshot.child("electionId").getValue(String.class);
+                        String candidateId = voteSnapshot.child("candidateId").getValue(String.class);
 
-                        // Increment vote count for the candidate
-                        if (candidateVotesMap.containsKey(candidateId)) {
-                            int currentVotes = candidateVotesMap.get(candidateId);
-                            candidateVotesMap.put(candidateId, currentVotes + 1);
+                        // Only collect candidate IDs for the current election
+                        if (electionId.equals(voteElectionId)) {
+                            candidateIds.add(candidateId); // Add candidateId to the set
                         }
                     }
 
-                    // Update the candidate list with vote count and percentage
-                    updateCandidateVoteData(candidates, candidateVotesMap);
+                    // Once all votes are processed, fetch candidate details
+                    fetchCandidateDetails();
                 } else {
                     Toast.makeText(voters_allCandidate_result.this, "No votes found for this election.", Toast.LENGTH_SHORT).show();
                 }
@@ -117,92 +79,62 @@ public class voters_allCandidate_result extends AppCompatActivity {
         });
     }
 
-    // Method to update candidates with vote count and percentage
-    private void updateCandidateVoteData(List<Candidate> candidates, Map<String, Integer> candidateVotesMap) {
-        for (Candidate candidate : candidates) {
-            int votes = candidateVotesMap.get(candidate.getId());
-            double percentage = totalVotes > 0 ? (votes * 100.0) / totalVotes : 0.0;
-            candidate.setVotes(votes);
-            candidate.setPercentage(percentage);
-        }
+    // Method to fetch candidate details from Firebase based on candidateIds from votes
+    private void fetchCandidateDetails() {
+        for (String candidateId : candidateIds) {
+            candidatesRef.child(candidateId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot candidateSnapshot) {
+                    if (candidateSnapshot.exists()) {
+                        // Extract candidate fields manually
+                        String firstName = candidateSnapshot.child("firstName").getValue(String.class);
+                        String lastName = candidateSnapshot.child("lastName").getValue(String.class);
+                        String section = candidateSnapshot.child("section").getValue(String.class);
+                        String imageUrl = candidateSnapshot.child("imageUrl").getValue(String.class);
+                        int votes = candidateSnapshot.child("voteCount").getValue(Integer.class) != null
+                                ? candidateSnapshot.child("voteCount").getValue(Integer.class)
+                                : 0;
 
-        // Sort candidates based on percentage (descending order)
-        Collections.sort(candidates, new Comparator<Candidate>() {
-            @Override
-            public int compare(Candidate c1, Candidate c2) {
-                return Double.compare(c2.getPercentage(), c1.getPercentage());
-            }
-        });
+                        // Create a new view for each candidate and add it to the candidateList
+                        addCandidateView(firstName + " " + lastName, section, votes, imageUrl);
+                    } else {
+                        Log.d("CandidateLog", "Candidate not found for ID: " + candidateId);
+                    }
+                }
 
-        // Display candidates
-        displayCandidates(candidates);
-    }
-
-    // Method to display candidates in the LinearLayout
-    private void displayCandidates(List<Candidate> candidates) {
-        for (Candidate candidate : candidates) {
-            // Inflate the candidate layout
-            View candidateCardView = getLayoutInflater().inflate(R.layout.candidate_items, candidateList, false);
-
-            // Get references to the TextView elements within the inflated layout
-            TextView candidateNameTextView = candidateCardView.findViewById(R.id.candidate_name);
-            TextView candidateSectionTextView = candidateCardView.findViewById(R.id.candidate_section);
-            TextView candidatePercentageTextView = candidateCardView.findViewById(R.id.candidatePercentage1);
-            TextView candidateVotesTextView = candidateCardView.findViewById(R.id.candidateVotes1);
-
-            // Set the candidate details
-            candidateNameTextView.setText(candidate.getName());
-            candidateSectionTextView.setText(candidate.getSection());
-            candidatePercentageTextView.setText(String.format("%.2f%%", candidate.getPercentage()));
-            candidateVotesTextView.setText(String.format("%d votes", candidate.getVotes()));
-
-            // Add the inflated view to the candidate list
-            candidateList.addView(candidateCardView);
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.e("CandidateLog", "Error fetching candidate: " + databaseError.getMessage());
+                }
+            });
         }
     }
 
-    // Candidate model class
-    private static class Candidate {
-        private String id;
-        private String name;
-        private String section;
-        private int votes;
-        private double percentage;
+    // Method to inflate candidate_items.xml and populate it with data
+    private void addCandidateView(String name, String section, int votes, String imageUrl) {
+        // Inflate the candidate_items.xml layout
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View candidateView = inflater.inflate(R.layout.candidate_items, candidateList, false);
 
-        public Candidate(String id, String name, String section, int votes, double percentage) {
-            this.id = id;
-            this.name = name;
-            this.section = section;
-            this.votes = votes;
-            this.percentage = percentage;
+        // Get references to the views in the candidate_items layout
+        TextView candidateNameView = candidateView.findViewById(R.id.candidate_name);
+        TextView candidateSectionView = candidateView.findViewById(R.id.candidate_section);
+        TextView candidateVotesView = candidateView.findViewById(R.id.candidateVotes1);
+        ImageView candidateImageView = candidateView.findViewById(R.id.candidate_image);
+
+        // Set the text and image for the candidate
+        candidateNameView.setText(name);
+        candidateSectionView.setText(section);
+        candidateVotesView.setText(votes + " votes");
+
+        // Load the candidate's image using Glide (or any image loader)
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            Glide.with(this).load(imageUrl).into(candidateImageView);
+        } else {
+            candidateImageView.setImageResource(R.drawable.profile); // Set default image if no URL
         }
 
-        public String getId() {
-            return id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getSection() {
-            return section;
-        }
-
-        public int getVotes() {
-            return votes;
-        }
-
-        public void setVotes(int votes) {
-            this.votes = votes;
-        }
-
-        public double getPercentage() {
-            return percentage;
-        }
-
-        public void setPercentage(double percentage) {
-            this.percentage = percentage;
-        }
+        // Add the inflated view to the candidateList layout
+        candidateList.addView(candidateView);
     }
 }
