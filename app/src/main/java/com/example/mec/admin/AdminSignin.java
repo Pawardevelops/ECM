@@ -1,5 +1,6 @@
 package com.example.mec.admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -71,13 +72,10 @@ public class AdminSignin extends AppCompatActivity {
         });
 
         // Handle sign up text click
-        signupText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Navigate to signup activity (implement later)
-                Toast.makeText(AdminSignin.this, "SignUp Logic here", Toast.LENGTH_SHORT).show();
-                // NavigationService.navigateToActivity(AdminSignin.this, SignUpActivity.class);
-            }
+        signupText.setOnClickListener(view -> {
+            // Navigate to the AdminSignup activity
+            Intent intent = new Intent(AdminSignin.this, adminSignup.class); // Replace AdminSignup with the actual signup activity class name
+            startActivity(intent);
         });
     }
 

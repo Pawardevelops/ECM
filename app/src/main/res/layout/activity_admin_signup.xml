@@ -137,55 +137,6 @@
                         android:hint="Last Name" />
                 </LinearLayout>
                 <LinearLayout
-                    android:id="@+id/candidate_sign_input_fields7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center">
-
-                    <EditText
-                        android:id="@+id/department"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        style="@style/gray_border_input_fields"
-                        android:hint="Department" />
-
-                    <EditText
-                        android:id="@+id/course"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        style="@style/gray_border_input_fields"
-                        android:hint="Course" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/candidate_sign_input_fields6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center">
-
-                    <EditText
-                        android:id="@+id/section"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        style="@style/gray_border_input_fields"
-                        android:hint="Section" />
-
-                    <EditText
-                        android:id="@+id/semester"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        style="@style/gray_border_input_fields"
-                        android:hint="Semester" />
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/candidate_sign_input_fields2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -235,6 +186,101 @@
                         style="@style/gray_border_input_fields"
                         android:hint="Confirm Password" />
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/candidate_sign_input_fields7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center">
+
+                    <!-- Department Dropdown -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Department"
+                        android:backgroundTint="#ffff">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/department"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:inputType="none"
+                            style="@style/gray_border_input_fields"
+                            app:simpleItems="@array/departments" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Course Dropdown -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Course"
+                        android:backgroundTint="#ffff">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/course"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:inputType="none"
+                            style="@style/gray_border_input_fields"
+                            app:simpleItems="@array/courses" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <!-- Spinners for section and semester without android:prompt -->
+                <LinearLayout
+                    android:id="@+id/candidate_sign_input_fields6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center">
+
+                    <!-- Section Dropdown -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Section"
+                        android:backgroundTint="#ffff">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/section"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:inputType="none"
+                            style="@style/gray_border_input_fields"
+                            app:simpleItems="@array/sections" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Semester Dropdown -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Semester"
+                        android:backgroundTint="#ffff">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/semester"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:inputType="none"
+                            style="@style/gray_border_input_fields"
+                            app:simpleItems="@array/semesters" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+
+
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
