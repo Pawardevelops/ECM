@@ -31,8 +31,6 @@ import android.graphics.Color;
 import android.view.View;
 import android.widget.LinearLayout;
 
-// other imports...
-
 public class voterSelectedCandidate extends AppCompatActivity {
 
     // Define views for UI components
@@ -46,17 +44,17 @@ public class voterSelectedCandidate extends AppCompatActivity {
     private TextView courseTextView;
     private TextView semesterTextView;
     private Button voteBtn;
-    private LinearLayout chipContainer; // New linear layout to hold chips
+    private LinearLayout chipContainer;
 
     private FirebaseAuth mAuth;
     private DatabaseReference votesRef;
     private DatabaseReference candidatesRef;
     private DatabaseReference electionVotesRef;
-    private DatabaseReference electionsRef; // New reference for elections
+    private DatabaseReference electionsRef;
 
-    private String electionId; // Store election ID for later use
-    private boolean hasVoted; // Track if the user has already voted
-    private String electionStatus; // Track the status of the election
+    private String electionId;
+    private boolean hasVoted;
+    private String electionStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,14 +72,14 @@ public class voterSelectedCandidate extends AppCompatActivity {
         courseTextView = findViewById(R.id.course_value);
         semesterTextView = findViewById(R.id.sem_value);
         voteBtn = findViewById(R.id.voteButton);
-        chipContainer = findViewById(R.id.chip); // Initialize chip container
+        chipContainer = findViewById(R.id.chip);
 
         // Firebase initialization
         mAuth = FirebaseAuth.getInstance();
         String userId = mAuth.getCurrentUser().getUid();  // Logged in voter ID
         candidatesRef = FirebaseDatabase.getInstance().getReference("candidates");
         votesRef = FirebaseDatabase.getInstance().getReference("votes");
-        electionsRef = FirebaseDatabase.getInstance().getReference("elections"); // Initialize elections reference
+        electionsRef = FirebaseDatabase.getInstance().getReference("elections");
 
         // Get candidate ID and election ID from the intent extras
         String candidateId = getIntent().getStringExtra("CANDIDATE_UID");
@@ -200,28 +198,38 @@ public class voterSelectedCandidate extends AppCompatActivity {
 
     // Method to check if the user has already voted in the election
     private void checkIfAlreadyVoted(String userId, String electionId, String candidateId) {
-        // Check in the votes collection
-        votesRef.child(electionId).child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                hasVoted = dataSnapshot.exists(); // Set hasVoted based on the result
-                if (hasVoted) {
-                    // The user has already voted
-                    addChip("You Have Already Voted", Color.RED);
-                    voteBtn.setEnabled(false); // Disable voting
-                } else {
-                    // The user has not voted yet, show confirmation dialog if status allows
-                    if (!"not_started".equals(electionStatus)) {
-                        showVoteConfirmationDialog(userId, candidateId, electionId);
-                    }
-                }
-            }
+        votesRef.orderByChild("voterId").equalTo(userId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        boolean hasVotedInThisElection = false;
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("Firebase", "Error checking vote status: " + databaseError.getMessage());
-            }
-        });
+                        // Check if the voter has voted in this election
+                        for (DataSnapshot voteSnapshot : dataSnapshot.getChildren()) {
+                            String voteElectionId = voteSnapshot.child("electionId").getValue(String.class);
+                            if (electionId.equals(voteElectionId)) {
+                                hasVotedInThisElection = true;
+                                break;
+                            }
+                        }
+
+                        if (hasVotedInThisElection) {
+                            // The user has already voted in this election
+                            addChip("You Have Already Voted", Color.RED);
+                            voteBtn.setEnabled(false); // Disable voting
+                        } else {
+                            // The user has not voted yet, show confirmation dialog
+                            if (!"not_started".equals(electionStatus)) {
+                                showVoteConfirmationDialog(userId, candidateId, electionId);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Log.e("Firebase", "Error checking vote status: " + databaseError.getMessage());
+                    }
+                });
     }
 
     // Method to show vote confirmation dialog
@@ -229,49 +237,62 @@ public class voterSelectedCandidate extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle("Confirm Vote")
                 .setMessage("Are you sure you want to vote for this candidate?")
-                .setPositiveButton("Yes", (dialog, which) -> {
-                    // Save the vote to Firebase
-                    saveVote(userId, candidateId, electionId);
-                })
+                .setPositiveButton("Yes", (dialogInterface, i) -> saveVote(userId, candidateId, electionId))
                 .setNegativeButton("No", null)
                 .show();
     }
 
     // Method to save vote to Firebase
-    // Method to save vote to Firebase and increment candidate's vote count
     private void saveVote(String userId, String candidateId, String electionId) {
-        // Save the vote
-        votesRef.child(electionId).child(userId).setValue(candidateId)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        // Increment the candidate's vote count atomically
-                        candidatesRef.child(candidateId).child("voteCount").runTransaction(new Transaction.Handler() {
-                            @NonNull
-                            @Override
-                            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
-                                Integer currentVotes = mutableData.getValue(Integer.class);
-                                if (currentVotes == null) {
-                                    mutableData.setValue(1);
-                                } else {
-                                    mutableData.setValue(currentVotes + 1);
-                                }
-                                return Transaction.success(mutableData);
-                            }
+        // Create a new vote entry
+        Map<String, Object> voteData = new HashMap<>();
+        voteData.put("electionId", electionId);
+        voteData.put("candidateId", candidateId);
+        voteData.put("voterId", userId);
 
-                            @Override
-                            public void onComplete(@Nullable DatabaseError databaseError, boolean committed, @Nullable DataSnapshot dataSnapshot) {
-                                if (committed) {
-                                    Toast.makeText(voterSelectedCandidate.this, "Vote cast successfully!", Toast.LENGTH_SHORT).show();
-                                    finish(); // Close the activity after voting
-                                } else {
-                                    Toast.makeText(voterSelectedCandidate.this, "Error updating vote count.", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                    } else {
-                        Toast.makeText(voterSelectedCandidate.this, "Error casting vote.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        // Generate a unique ID for each vote (auto-generated by Firebase)
+        String voteId = votesRef.push().getKey();
+
+        // Save the vote under the votes collection
+        if (voteId != null) {
+            votesRef.child(voteId).setValue(voteData)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            // Increment the candidate's vote count atomically
+                            incrementCandidateVoteCount(candidateId);
+                        } else {
+                            Toast.makeText(voterSelectedCandidate.this, "Error casting vote.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            Toast.makeText(voterSelectedCandidate.this, "Error generating vote ID.", Toast.LENGTH_SHORT).show();
+        }
     }
 
+    // Method to increment the candidate's vote count atomically
+    private void incrementCandidateVoteCount(String candidateId) {
+        candidatesRef.child(candidateId).child("voteCount").runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                Integer currentVotes = mutableData.getValue(Integer.class);
+                if (currentVotes == null) {
+                    mutableData.setValue(1);
+                } else {
+                    mutableData.setValue(currentVotes + 1);
+                }
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, boolean committed, @Nullable DataSnapshot dataSnapshot) {
+                if (committed) {
+                    Toast.makeText(voterSelectedCandidate.this, "Vote cast successfully!", Toast.LENGTH_SHORT).show();
+                    finish(); // Close the activity after voting
+                } else {
+                    Toast.makeText(voterSelectedCandidate.this, "Error updating vote count.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 }
