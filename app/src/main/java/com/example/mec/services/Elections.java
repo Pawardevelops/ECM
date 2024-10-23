@@ -7,6 +7,8 @@ public class Elections {
     private String time;
     private String section;
     private String department;
+    private String Id;
+    private String status;
 
     // Default constructor required for calls to DataSnapshot.getValue(Election.class)
     public Elections() {}
@@ -23,6 +25,16 @@ public class Elections {
     // Getters and setters (optional for Firebase Realtime Database)
     public String getTitle() {
         return title;
+    }
+    public String getId(){return Id;}
+    public void setId(String Id){this.Id=Id;}
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public void setTitle(String title) {

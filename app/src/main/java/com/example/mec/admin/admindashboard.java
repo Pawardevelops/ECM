@@ -64,7 +64,7 @@ public class admindashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                NavigationService.navigateToActivity(admindashboard.this, Help.class);
+                NavigationService.navigateToActivity(admindashboard.this, adminElectionList.class);
             }
         });
 

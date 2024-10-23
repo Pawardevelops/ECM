@@ -47,13 +47,28 @@
             android:textSize="14sp"
             android:textColor="@color/black" />
     </LinearLayout>
-    <com.google.android.material.chip.Chip
-        android:id="@+id/candidate_status"
+    <LinearLayout
+
+        android:orientation="horizontal"
+        android:id="@+id/chip"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:textAlignment="center"
-        android:text="Pending"/>
+        >
+        <TextView
+            android:id="@+id/candidatePercentage1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/black" />
+        <TextView
+            android:id="@+id/candidateVotes1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
 </LinearLayout>
 
 </androidx.cardview.widget.CardView>

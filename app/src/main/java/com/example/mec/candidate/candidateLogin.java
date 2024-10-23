@@ -123,8 +123,6 @@ public class candidateLogin extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    String role = dataSnapshot.child("role").getValue(String.class);
-                    if ("Candidate".equals(role)) {
                         // Navigate to candidate dashboard
                         setLoadingState(false);
                         Toast.makeText(candidateLogin.this, "Login successful", Toast.LENGTH_SHORT).show();
@@ -132,12 +130,7 @@ public class candidateLogin extends AppCompatActivity {
                         SharedPreferenceHelper.saveLoginInfo(candidateLogin.this, true, "admin");
 
                         NavigationService.navigateToActivity(candidateLogin.this, candidateDashboard.class);
-                    } else {
-                        // If not a candidate, show error
-                        setLoadingState(false);
-                        Toast.makeText(candidateLogin.this, "Access denied: You are not a candidate", Toast.LENGTH_LONG).show();
-                        FirebaseAuth.getInstance().signOut();  // Sign out the user if they are not a candidate
-                    }
+
                 } else {
                     // No user data found
                     setLoadingState(false);

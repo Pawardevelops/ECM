@@ -21,6 +21,7 @@ public class adminElections extends AppCompatActivity {
 
     private LinearLayout electionsContainer;  // Container to add election buttons dynamically
     private DatabaseReference databaseReference;
+    private AppCompatButton createElectionButton;  // Add a reference to the Create Election button
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,14 @@ public class adminElections extends AppCompatActivity {
         setContentView(R.layout.activity_admin_elections);
 
         electionsContainer = findViewById(R.id.electionsContainer);  // This is where we'll add election buttons
+        createElectionButton = findViewById(R.id.electionCreate);    // Find the Create Election button
         databaseReference = FirebaseDatabase.getInstance().getReference("elections");
+
+        // Set up OnClickListener for Create Election button
+        createElectionButton.setOnClickListener(v -> {
+            Intent createElectionIntent = new Intent(adminElections.this, adminCreateElections.class);
+            startActivity(createElectionIntent);  // Navigate to the screen to create elections
+        });
 
         // Fetch and display elections
         fetchAndDisplayElections();

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.MEC"
         tools:targetApi="31">
         <activity
+            android:name=".admin.adminElectionList"
+            android:exported="false" />
+        <activity
             android:name=".admin.adminElections"
             android:exported="false" />
         <activity

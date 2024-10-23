@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.mec.R;
-import com.example.mec.services.Candidate; // Import your Candidate model
+import com.example.mec.services.Candidate;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,7 +27,6 @@ public class voterCandidateSelection extends AppCompatActivity {
     private LinearLayout candidatesContainer;
     private DatabaseReference candidatesRef;
     private String section;
-    private String department;
     private String electionId;  // Adding electionId for passing along with candidate ID
 
     @Override
@@ -37,24 +36,26 @@ public class voterCandidateSelection extends AppCompatActivity {
 
         candidatesContainer = findViewById(R.id.candidates_container); // Container to add candidate views dynamically
 
-        // Get the section, department, and electionId passed from the previous activity
+        // Get the section and electionId passed from the previous activity
         section = getIntent().getStringExtra("SECTION");
-        department = getIntent().getStringExtra("DEPARTMENT");
         electionId = getIntent().getStringExtra("ELECTION_ID");  // Receiving election ID as well
 
-        if (section == null || department == null || electionId == null) {
-            Toast.makeText(this, "No section, department, or election ID found", Toast.LENGTH_SHORT).show();
-            finish(); // Close the activity if no section, department, or election ID is found
+        // Debugging: Toast to check if values are received
+        Toast.makeText(this, "Section: " + section + " ElectionID: " + electionId, Toast.LENGTH_LONG).show();
+
+        if (section == null || electionId == null) {
+            Toast.makeText(this, "No section or election ID found", Toast.LENGTH_SHORT).show();
+            finish(); // Close the activity if no section or election ID is found
         }
 
         // Initialize Firebase Database reference
         candidatesRef = FirebaseDatabase.getInstance().getReference("candidates");
 
-        // Fetch and display candidates from the specified section and department
-        fetchCandidatesBySectionAndDepartment(section, department);
+        // Fetch and display candidates from the specified section
+        fetchCandidatesBySection(section);
     }
 
-    private void fetchCandidatesBySectionAndDepartment(String section, String department) {
+    private void fetchCandidatesBySection(String section) {
         // Query candidates where the section matches
         Query query = candidatesRef.orderByChild("section").equalTo(section);
 
@@ -64,7 +65,7 @@ public class voterCandidateSelection extends AppCompatActivity {
                 candidatesContainer.removeAllViews(); // Clear any previous candidates
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Candidate candidate = snapshot.getValue(Candidate.class);
-                    if (candidate != null && candidate.getDepartment().equals(department)) { // Filter by department
+                    if (candidate != null) { // Ensure candidate object is not null
                         addCandidateToLayout(candidate, snapshot.getKey()); // Pass the candidate UID
                     }
                 }

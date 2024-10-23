@@ -7,6 +7,8 @@
     <color name="tertiary">#e0f4ff</color>
     <color name="red">#DF0A0A</color>
     <color name="lightred">#E88B8B</color>
-    <color name="green">#0C9B07</color>
+    <color name="green">#047500</color>
+    <color name="lightgreen">#85EF81</color>
+    <color name="gray">#d3d3d3</color>
 
 </resources>

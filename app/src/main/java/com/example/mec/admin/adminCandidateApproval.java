@@ -63,7 +63,7 @@ public class adminCandidateApproval extends AppCompatActivity {
                             case "approved":
                                 approvedCandidates.add(candidate);
                                 break;
-                            case "cancelled":
+                            case "canceled":
                                 canceledCandidates.add(candidate);
                                 break;
                         }
@@ -105,7 +105,9 @@ public class adminCandidateApproval extends AppCompatActivity {
         TextView candidateName = candidateView.findViewById(R.id.candidate_name);
         TextView candidateSection = candidateView.findViewById(R.id.candidate_section);
         ImageView candidateImage = candidateView.findViewById(R.id.candidate_image);
+        LinearLayout chipContainer = candidateView.findViewById(R.id.chip); // The container for the chip
 
+        // Set the candidate's name and section
         candidateName.setText(candidate.getFirstName() + " " + candidate.getLastName());
         candidateSection.setText(candidate.getSection());
 
@@ -121,6 +123,30 @@ public class adminCandidateApproval extends AppCompatActivity {
             candidateImage.setImageResource(R.drawable.profile);
         }
 
+        // Add a Chip dynamically to show the candidate status
+        com.google.android.material.chip.Chip statusChip = new com.google.android.material.chip.Chip(this);
+        statusChip.setText(candidate.getStatus());  // Set the text based on candidate status
+        statusChip.setTextColor(getResources().getColor(android.R.color.white)); // Set text color to white
+        // Set the Chip's background color based on the candidate's status
+        statusChip.setChipStrokeWidth(0);
+        switch (candidate.getStatus()) {
+            case "approved":
+                statusChip.setChipBackgroundColorResource(R.color.lightgreen); // Replace with your green color
+                statusChip.setTextColor(getResources().getColor(R.color.green));
+
+                break;
+            case "canceled":
+                statusChip.setChipBackgroundColorResource(R.color.lightred); // Replace with your red color
+               statusChip.setTextColor(getResources().getColor(R.color.red));
+                break;
+            default:
+                statusChip.setChipBackgroundColorResource(R.color.gray); // Replace with your gray color for pending
+                break;
+        }
+
+        // Add the Chip to the container
+        chipContainer.addView(statusChip);
+
         // Set an OnClickListener for the candidate card
         candidateView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,4 +159,5 @@ public class adminCandidateApproval extends AppCompatActivity {
 
         candidatesContainer.addView(candidateView); // Add the inflated view to the container
     }
+
 }
