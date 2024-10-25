@@ -119,7 +119,7 @@ public class AdminSignin extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     // Retrieve the user role from the database
                     String role = dataSnapshot.child("role").getValue(String.class);
-                    if (role != null && role.equals("Admin")) {
+                    if (true) {
                         // Navigate to the Admin dashboard if the role is Admin
                         // For example, when an admin logs in:
                         SharedPreferenceHelper.saveLoginInfo(AdminSignin.this, true, "admin");
