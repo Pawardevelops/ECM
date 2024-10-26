@@ -86,7 +86,7 @@ public class ProfileActivity extends AppCompatActivity {
                     // Fetching values from the database
                     String username = dataSnapshot.child("firstName").getValue(String.class);
                     String registrationNumber = dataSnapshot.child("registrationNo").getValue(String.class);
-                    String phoneNumber = dataSnapshot.child("phone").getValue(String.class);
+                    String phoneNumber = dataSnapshot.child("email").getValue(String.class);
                     String department = dataSnapshot.child("department").getValue(String.class);
                     String section = dataSnapshot.child("section").getValue(String.class);
                     String course = dataSnapshot.child("course").getValue(String.class);
