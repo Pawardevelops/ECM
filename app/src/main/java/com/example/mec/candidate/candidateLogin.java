@@ -125,11 +125,11 @@ public class candidateLogin extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                         // Navigate to candidate dashboard
                         setLoadingState(false);
-                        Toast.makeText(candidateLogin.this, "Login successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(candidateLogin.this, "Login Successful", Toast.LENGTH_SHORT).show();
                         // For example, when an admin logs in:
                         SharedPreferenceHelper.saveLoginInfo(candidateLogin.this, true, "admin");
 
-                        NavigationService.navigateToActivity(candidateLogin.this, candidateDashboard.class);
+                        NavigationService.navigateToActivityAfterLogin(candidateLogin.this, candidateDashboard.class);
 
                 } else {
                     // No user data found

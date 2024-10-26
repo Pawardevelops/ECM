@@ -85,21 +85,22 @@ public class adminElectionList extends AppCompatActivity {
         LinearLayout chipContainer = electionCardView.findViewById(R.id.chip);
 
         // Set the election data to the TextViews
-        electionName.setText("Election : "+election.getTitle());  // Assuming the election title corresponds to "Candidate Name"
+        electionName.setText(election.getTitle());  // Assuming the election title corresponds to "Candidate Name"
         electionSection.setText("Section : "+election.getSection());  // Assuming the election section corresponds to "Candidate Section"
 
         // Dynamically create and add a Chip to display the election status
         Chip statusChip = new Chip(this);
         statusChip.setText(election.getStatus() != null ? election.getStatus() : "Not Started");
         statusChip.setChipStrokeWidth(0);
+        statusChip.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         // Set the Chip's background color based on the status
         switch (election.getStatus() != null ? election.getStatus() : "not_started") {
-            case "started":
+            case "Started":
                 statusChip.setChipBackgroundColorResource(R.color.lightgreen);  // Green for started
                 statusChip.setTextColor(getResources().getColor(R.color.green));
                 break;
-            case "completed":
-                statusChip.setChipBackgroundColorResource(R.color.secondary);  // Blue for completed
+            case "Finished":
+                statusChip.setChipBackgroundColorResource(R.color.tertiary);  // Blue for completed
                 statusChip.setTextColor(getResources().getColor(R.color.primary));
                 break;
             default:  // Not started or no status
@@ -128,10 +129,10 @@ public class adminElectionList extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0: // Start Election
-                                updateElectionStatus(election.getId(), "started");
+                                updateElectionStatus(election.getId(), "Started");
                                 break;
                             case 1: // Complete Election
-                                updateElectionStatus(election.getId(), "completed");
+                                updateElectionStatus(election.getId(), "Finished");
                                 break;
                         }
                     }

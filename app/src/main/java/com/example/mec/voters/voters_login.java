@@ -101,7 +101,7 @@ public class voters_login extends AppCompatActivity {
                             // For example, when an admin logs in:
                             SharedPreferenceHelper.saveLoginInfo(voters_login.this, true, "voter");
 
-                            NavigationService.navigateToActivity(voters_login.this, VotersDashboard.class);
+                            NavigationService.navigateToActivityAfterLogin(voters_login.this, VotersDashboard.class);
                         }
                     } else {
 

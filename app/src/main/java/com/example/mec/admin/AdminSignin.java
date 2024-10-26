@@ -124,8 +124,10 @@ public class AdminSignin extends AppCompatActivity {
                         // For example, when an admin logs in:
                         SharedPreferenceHelper.saveLoginInfo(AdminSignin.this, true, "admin");
 
-                        NavigationService.navigateToActivity(AdminSignin.this, admindashboard.class);
+                        NavigationService.navigateToActivityAfterLogin(AdminSignin.this, admindashboard.class);
+
                         Toast.makeText(AdminSignin.this, "Login successful!", Toast.LENGTH_SHORT).show();
+
                     } else {
                         // Show error if the user is not an Admin
                         Toast.makeText(AdminSignin.this, "You are not authorized as Admin", Toast.LENGTH_SHORT).show();
