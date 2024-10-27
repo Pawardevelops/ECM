@@ -55,7 +55,7 @@ public class adminSignup extends AppCompatActivity {
 
         // Initialize Firebase Auth, Database, and Storage
         firebaseAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Admins");
+        databaseReference = FirebaseDatabase.getInstance().getReference("admins");
         storageReference = FirebaseStorage.getInstance().getReference("profile_images");
 
         // Initialize input fields
@@ -280,6 +280,7 @@ public class adminSignup extends AppCompatActivity {
         userMap.put("email", email);
         userMap.put("registrationNo", registrationNo);
         userMap.put("profileImageUrl", profileImageUrl);
+        userMap.put("role","admin");
 
         databaseReference.child(userId).setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

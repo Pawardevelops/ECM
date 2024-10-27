@@ -7,7 +7,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -18,31 +17,36 @@ import com.example.mec.services.SharedPreferenceHelper;
 import com.example.mec.voters.voters_signup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class voters_login extends AppCompatActivity {
     private EditText emailEditText, passwordEditText;
     private AppCompatButton loginButton;
     private TextView forgotPasswordTextView, signupTextView;
-    private ProgressBar progressBar;  // ProgressBar instance
+    private ProgressBar progressBar;
 
-    // Firebase Authentication instance
     private FirebaseAuth mAuth;
+    private DatabaseReference dbRef;  // Firebase Database reference
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voters_login);
 
-        // Initialize Firebase Auth
+        // Initialize Firebase Auth and Database Reference
         mAuth = FirebaseAuth.getInstance();
+        dbRef = FirebaseDatabase.getInstance().getReference("voters");
 
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.start);
         signupTextView = findViewById(R.id.candidate_login);
-        progressBar = findViewById(R.id.progressBar);  // Initialize the ProgressBar
+        progressBar = findViewById(R.id.progressBar);
         forgotPasswordTextView = findViewById(R.id.forgotPassword);
-
 
         forgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +60,6 @@ public class voters_login extends AppCompatActivity {
             }
         });
 
-        // Set click listener for login button
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,17 +69,13 @@ public class voters_login extends AppCompatActivity {
                 if (email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(voters_login.this, "Please fill in both fields", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Show progress bar and disable login button
                     progressBar.setVisibility(View.VISIBLE);
                     loginButton.setVisibility(View.GONE);
-
-                    // Perform login authentication using Firebase
                     loginUser(email, password);
                 }
             }
         });
 
-        // Set click listener for "Sign Up"
         signupTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,27 +89,48 @@ public class voters_login extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     progressBar.setVisibility(View.GONE);
-                    loginButton.setVisibility(View.VISIBLE);  // Re-enable the login button
+                    loginButton.setVisibility(View.VISIBLE);
 
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
-
-                            progressBar.setVisibility(View.GONE);
-                            loginButton.setVisibility(View.VISIBLE);
-                            // For example, when an admin logs in:
-                            SharedPreferenceHelper.saveLoginInfo(voters_login.this, true, "voter");
-
-                            NavigationService.navigateToActivityAfterLogin(voters_login.this, VotersDashboard.class);
+                            checkUserRole(user.getUid());
                         }
                     } else {
-
                         progressBar.setVisibility(View.GONE);
                         loginButton.setVisibility(View.VISIBLE);
                         Toast.makeText(voters_login.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
+
+    // Check if the logged-in user is a voter using Realtime Database
+    private void checkUserRole(String uid) {
+        dbRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    String role = dataSnapshot.child("role").getValue(String.class);
+                    if ("voter".equals(role)) {
+                        // Save login state and navigate to the Voters Dashboard
+                        SharedPreferenceHelper.saveLoginInfo(voters_login.this, true, "voter");
+                        NavigationService.navigateToActivityAfterLogin(voters_login.this, VotersDashboard.class);
+                        Toast.makeText(voters_login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(voters_login.this, "Access Denied: Not a voter", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(voters_login.this, "No user data found", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(voters_login.this, "Failed to retrieve user role", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void sendPasswordResetEmail(String email) {
         progressBar.setVisibility(View.VISIBLE);
         mAuth.sendPasswordResetEmail(email)
@@ -118,7 +138,6 @@ public class voters_login extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
                         Toast.makeText(voters_login.this, "Password reset email sent.", Toast.LENGTH_SHORT).show();
-                        // Navigate to the forgot password activity if needed
                         NavigationService.navigateToActivity(voters_login.this, forgotPassword.class);
                     } else {
                         Toast.makeText(voters_login.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -126,4 +145,3 @@ public class voters_login extends AppCompatActivity {
                 });
     }
 }
-

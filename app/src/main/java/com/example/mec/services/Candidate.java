@@ -6,6 +6,7 @@ public class Candidate {
     public String department, course, section, semester, status = "Pending";
     public String userType;
     public int voteCount;
+    public String role;
 
     public Candidate(String uid, String firstName, String lastName, String email, String registrationNo, String slogan, String imageUrl,
                      String department, String course, String section, String semester, String userType, String status,int votes) {
@@ -23,6 +24,7 @@ public class Candidate {
         this.userType = userType;
         this.status = status;
         this.voteCount = votes;
+        role="candidate";
 
     }
 

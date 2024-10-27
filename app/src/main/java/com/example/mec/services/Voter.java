@@ -28,7 +28,7 @@ public class Voter {
         this.section = section;
         this.course = course;
         this.semester = semester; // Initialize semester
-        this.role = role;
+        this.role = "voter";
     }
 
     public String getFirstName() {

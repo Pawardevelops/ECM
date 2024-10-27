@@ -1,10 +1,15 @@
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:orientation="vertical"
     android:background="#FFFFFF">
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="450dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -439,4 +444,49 @@
         <!-- Add more FAQ items as needed -->
 
     </LinearLayout>
-</ScrollView>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        style="@style/gray_border_input_fields"
+        android:padding="10dp"
+        >
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/profile"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Contact.ecm@ecm.com"
+            android:layout_weight="6"
+            android:textSize="20sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        style="@style/gray_border_input_fields"
+        android:padding="10dp"
+        >
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/phone"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="7066062958"
+            android:layout_weight="6"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+</LinearLayout>

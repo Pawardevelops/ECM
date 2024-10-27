@@ -118,21 +118,28 @@ public class candidateLogin extends AppCompatActivity {
     }
 
     // Check if the logged-in user is a candidate using Realtime Database
+    // Check if the logged-in user is a candidate using Realtime Database
     private void checkUserRole(String uid) {
         dbRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                        // Navigate to candidate dashboard
+                    // Check if the role field is "candidate"
+                    String role = dataSnapshot.child("role").getValue(String.class);
+                    if ("candidate".equals(role)) {
+                        // User is a candidate, proceed to dashboard
                         setLoadingState(false);
                         Toast.makeText(candidateLogin.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        // For example, when an admin logs in:
-                        SharedPreferenceHelper.saveLoginInfo(candidateLogin.this, true, "admin");
+                        SharedPreferenceHelper.saveLoginInfo(candidateLogin.this, true, "candidate");
 
                         NavigationService.navigateToActivityAfterLogin(candidateLogin.this, candidateDashboard.class);
-
+                    } else {
+                        // User role is not "candidate", show an error message
+                        setLoadingState(false);
+                        Toast.makeText(candidateLogin.this, "Access Denied: Not a candidate", Toast.LENGTH_LONG).show();
+                    }
                 } else {
-                    // No user data found
+                    // No user data found in the candidates collection
                     setLoadingState(false);
                     Toast.makeText(candidateLogin.this, "No user data found", Toast.LENGTH_LONG).show();
                 }
@@ -145,6 +152,7 @@ public class candidateLogin extends AppCompatActivity {
             }
         });
     }
+
 
     // Method to show/hide loading state
     private void setLoadingState(boolean isLoading) {

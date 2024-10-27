@@ -42,7 +42,7 @@ public class AdminSignin extends AppCompatActivity {
         setContentView(R.layout.activity_admin_signin);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Admins");
+        databaseReference = FirebaseDatabase.getInstance().getReference("admins");
 
         emailInput = findViewById(R.id.emailInput);
         passwordInput = findViewById(R.id.passwordInput);

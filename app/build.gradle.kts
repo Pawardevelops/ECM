@@ -52,6 +52,8 @@ dependencies {
     implementation("com.google.android.material:material:1.8.0")
     implementation ("com.facebook.shimmer:shimmer:0.5.0")
 
+    implementation("io.github.florent37:shapeofview:1.4.7")
+
 
 
 
