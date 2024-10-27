@@ -50,7 +50,7 @@ public class adminProfile extends AppCompatActivity {
         }
 
         String userId = currentUser.getUid();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Admins").child(userId);
+        databaseReference = FirebaseDatabase.getInstance().getReference("admins").child(userId);
 
         // Initialize UI elements
         candidateUsername = findViewById(R.id.candidate_username);

@@ -3,7 +3,7 @@ package com.example.mec.services;
 public class Candidate {
     public String uid; // Add this field for UID
     public String firstName, lastName, email, registrationNo, slogan, imageUrl;
-    public String department, course, section, semester, status = "Pending";
+    public String department, course, section, semester, status = "pending";
     public String userType;
     public int voteCount;
     public String role;

@@ -47,6 +47,11 @@ public class Voter {
         return imageUrl;
     }
 
-    // Getters and setters (if needed)
+    public String getRole(String role){
+        return role;
+    }
+    public void setRole(String role){
+        this.role = role;
+    }
 }
 

@@ -228,24 +228,23 @@ public class CandidateSignup extends AppCompatActivity {
     }
 
     // Save candidate data to Firebase Realtime Database
+    // Save candidate data to Firebase Realtime Database
     private void saveCandidateData(String userId, String firstName, String lastName, String email, String registrationNo, String slogan,
                                    String imageUrl, String department, String course, String section, String semester) {
-        // Assign default values to avoid nulls
+        // Assign the role "candidate" to ensure it’s saved correctly
         Candidate candidate = new Candidate(
                 userId,
-                firstName != null ? firstName : "",
-                lastName != null ? lastName : "",
-                email != null ? email : "",
-                registrationNo != null ? registrationNo : "",
-                slogan != null ? slogan : "",
-                imageUrl != null ? imageUrl : "",
-                department != null ? department : "",
-                course != null ? course : "",
-                section != null ? section : "",
-                semester != null ? semester : "",
-                "Candidate",
-                0
-
+                firstName,
+                lastName,
+                email,
+                registrationNo,
+                slogan,
+                imageUrl,
+                department,
+                course,
+                section,
+                semester,
+                "candidate" // Explicitly set role to "candidate" here
         );
 
         dbRef.child(userId).setValue(candidate)
@@ -258,6 +257,7 @@ public class CandidateSignup extends AppCompatActivity {
                     setLoadingState(false);
                 });
     }
+
 
     // Set loading state for the sign-up button
     private void setLoadingState(boolean isLoading) {
