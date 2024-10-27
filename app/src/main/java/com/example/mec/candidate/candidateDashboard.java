@@ -35,7 +35,7 @@ public class candidateDashboard extends AppCompatActivity {
         candidatesButton = findViewById(R.id.candidatesButton);
         helpButton = findViewById(R.id.helpButton);
         campaignManagementButton = findViewById(R.id.campaignManagementButton);
-        supporterInteractionButton = findViewById(R.id.supporterInteractionButton);
+
 
         // Set click listeners for each button
         profileButton.setOnClickListener(new View.OnClickListener() {
@@ -74,13 +74,13 @@ public class candidateDashboard extends AppCompatActivity {
         campaignManagementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(candidateDashboard.this, CampaignManagementActivity.class);
-//                startActivity(intent);
-                Toast.makeText(candidateDashboard.this,"test",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(candidateDashboard.this, candidateCampaing.class);
+                startActivity(intent);
+              //  Toast.makeText(candidateDashboard.this,"test",Toast.LENGTH_LONG).show();
             }
         });
 
-        supporterInteractionButton.setOnClickListener(new View.OnClickListener() {
+       /* supporterInteractionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                Intent intent = new Intent(candidateDashboard.this, SupporterInteractionActivity.class);
@@ -88,6 +88,6 @@ public class candidateDashboard extends AppCompatActivity {
                 Toast.makeText(candidateDashboard.this,"test",Toast.LENGTH_LONG).show();
 
             }
-        });
+        });*/
     }
 }
