@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Title of FAQ Page -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,7 +22,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="16dp" />
 
-        <!-- FAQ Item 1 -->
+        <!-- FAQ Item 1: General Information -->
         <LinearLayout
             android:id="@+id/faq_item_1"
             android:layout_width="match_parent"
@@ -31,7 +32,7 @@
             android:background="#F5F5F5"
             android:layout_marginBottom="10dp">
 
-            <!-- Question Section -->
+            <!-- Question and Toggle Icon -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,24 +53,22 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_add"
-                android:layout_gravity="end"
-                    />
+                    android:layout_gravity="end" />
             </LinearLayout>
 
-            <!-- Answer Section (Hidden Initially) -->
+            <!-- Answer (Initially Hidden) -->
             <TextView
                 android:id="@+id/answer_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ECM stands for Election Commission of Manipal..."
+                android:text="ECM stands for Election Commission of Manipal, which is responsible for managing and overseeing student elections in Manipal University."
                 android:textSize="16sp"
                 android:textColor="#333333"
                 android:visibility="gone"
                 android:layout_marginTop="8dp" />
-
         </LinearLayout>
 
-        <!-- FAQ Item 2 -->
+        <!-- FAQ Item 2: Registration -->
         <LinearLayout
             android:id="@+id/faq_item_2"
             android:layout_width="match_parent"
@@ -79,7 +78,7 @@
             android:background="#F5F5F5"
             android:layout_marginBottom="10dp">
 
-            <!-- Question Section -->
+            <!-- Question and Toggle Icon -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,7 +90,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="How to register for ECM?"
+                    android:text="How do I register to vote in the ECM elections?"
                     android:textSize="18sp"
                     android:textColor="#000000" />
 
@@ -100,22 +99,344 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_add"
-                android:layout_gravity="end" />
+                    android:layout_gravity="end" />
             </LinearLayout>
 
-            <!-- Answer Section (Hidden Initially) -->
+            <!-- Answer (Initially Hidden) -->
             <TextView
                 android:id="@+id/answer_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="You can register by visiting the official ECM website..."
+                android:text="You can register by visiting the ECM App, where you’ll find a registration form to complete with your university details."
                 android:textSize="16sp"
                 android:textColor="#333333"
                 android:visibility="gone"
                 android:layout_marginTop="8dp" />
         </LinearLayout>
 
-        <!-- More FAQ Items can be added in similar fashion -->
+        <!-- FAQ Item 3: Voting Process -->
+        <LinearLayout
+            android:id="@+id/faq_item_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:background="#F5F5F5"
+            android:layout_marginBottom="10dp">
+
+            <!-- Question and Toggle Icon -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/question_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="How does the voting process work?"
+                    android:textSize="18sp"
+                    android:textColor="#000000" />
+
+                <ImageView
+                    android:id="@+id/toggle_icon_3"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_add"
+                    android:layout_gravity="end" />
+            </LinearLayout>
+
+            <!-- Answer (Initially Hidden) -->
+            <TextView
+                android:id="@+id/answer_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="The voting process is conducted online via the ECM App. You will receive login credentials, and after logging in, you can cast your vote for your preferred candidates."
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:visibility="gone"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <!-- FAQ Item 4: Candidate Requirements -->
+        <LinearLayout
+            android:id="@+id/faq_item_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:background="#F5F5F5"
+            android:layout_marginBottom="10dp">
+
+            <!-- Question and Toggle Icon -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/question_4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Who can run as a candidate in ECM elections?"
+                    android:textSize="18sp"
+                    android:textColor="#000000" />
+
+                <ImageView
+                    android:id="@+id/toggle_icon_4"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_add"
+                    android:layout_gravity="end" />
+            </LinearLayout>
+
+            <!-- Answer (Initially Hidden) -->
+            <TextView
+                android:id="@+id/answer_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Any registered student with a valid registration number and who meets eligibility criteria can apply to run in the ECM elections."
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:visibility="gone"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <!-- FAQ Item 5: Election Results -->
+        <LinearLayout
+            android:id="@+id/faq_item_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:background="#F5F5F5"
+            android:layout_marginBottom="10dp">
+
+            <!-- Question and Toggle Icon -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/question_5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="When are the election results announced?"
+                    android:textSize="18sp"
+                    android:textColor="#000000" />
+
+                <ImageView
+                    android:id="@+id/toggle_icon_5"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_add"
+                    android:layout_gravity="end" />
+            </LinearLayout>
+
+            <!-- Answer (Initially Hidden) -->
+            <TextView
+                android:id="@+id/answer_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Election results are announced within 48 hours of the voting process closing. You can check the result section for updates."
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:visibility="gone"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+        <!-- FAQ Item 6: Voting Eligibility -->
+        <LinearLayout
+            android:id="@+id/faq_item_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:background="#F5F5F5"
+            android:layout_marginBottom="10dp">
+
+            <!-- Question and Toggle Icon -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/question_6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Who is eligible to vote in ECM elections?"
+                    android:textSize="18sp"
+                    android:textColor="#000000" />
+
+                <ImageView
+                    android:id="@+id/toggle_icon_6"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_add"
+                    android:layout_gravity="end" />
+            </LinearLayout>
+
+            <!-- Answer (Initially Hidden) -->
+            <TextView
+                android:id="@+id/answer_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="All registered students who have a valid registration number and have completed the registration process are eligible to vote."
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:visibility="gone"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <!-- FAQ Item 7: Voting Anonymity -->
+        <LinearLayout
+            android:id="@+id/faq_item_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:background="#F5F5F5"
+            android:layout_marginBottom="10dp">
+
+            <!-- Question and Toggle Icon -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/question_7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Is my vote anonymous?"
+                    android:textSize="18sp"
+                    android:textColor="#000000" />
+
+                <ImageView
+                    android:id="@+id/toggle_icon_7"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_add"
+                    android:layout_gravity="end" />
+            </LinearLayout>
+
+            <!-- Answer (Initially Hidden) -->
+            <TextView
+                android:id="@+id/answer_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Yes, all votes are kept completely anonymous to ensure privacy and fairness in the election process."
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:visibility="gone"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <!-- FAQ Item 8: Voting System Issues -->
+        <LinearLayout
+            android:id="@+id/faq_item_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:background="#F5F5F5"
+            android:layout_marginBottom="10dp">
+
+            <!-- Question and Toggle Icon -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/question_8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="What should I do if I face issues while voting?"
+                    android:textSize="18sp"
+                    android:textColor="#000000" />
+
+                <ImageView
+                    android:id="@+id/toggle_icon_8"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_add"
+                    android:layout_gravity="end" />
+            </LinearLayout>
+
+            <!-- Answer (Initially Hidden) -->
+            <TextView
+                android:id="@+id/answer_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="If you experience any technical difficulties, please contact the ECM support team immediately for assistance."
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:visibility="gone"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <!-- FAQ Item 9: Election Rules and Regulations -->
+        <LinearLayout
+            android:id="@+id/faq_item_9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:background="#F5F5F5"
+            android:layout_marginBottom="10dp">
+
+            <!-- Question and Toggle Icon -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/question_9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Where can I find the election rules and regulations?"
+                    android:textSize="18sp"
+                    android:textColor="#000000" />
+
+                <ImageView
+                    android:id="@+id/toggle_icon_9"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_add"
+                    android:layout_gravity="end" />
+            </LinearLayout>
+
+            <!-- Answer (Initially Hidden) -->
+            <TextView
+                android:id="@+id/answer_9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="The election rules and regulations are available on the ECM App under the 'Resources' section for easy reference."
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:visibility="gone"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+
+        <!-- Add more FAQ items as needed -->
 
     </LinearLayout>
 </ScrollView>

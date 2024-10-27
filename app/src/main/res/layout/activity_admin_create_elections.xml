@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <LinearLayout
             android:id="@+id/header_title"
             android:layout_width="match_parent"
@@ -36,6 +37,7 @@
                 android:textColor="@color/black"
                 android:text="@string/ECM_fullform" />
         </LinearLayout>
+
         <!-- Election Title -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/election_title_input_layout"
@@ -111,44 +113,55 @@
                 android:onClick="showTimePickerDialog" /> <!-- Hook to TimePickerDialog -->
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Election Type (Dropdown/Spinner) -->
+        <!-- Election Section (Dropdown) -->
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
             android:id="@+id/election_section_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Section"
             android:layout_marginTop="16dp"
+            android:backgroundTint="#ffff"
             app:startIconDrawable="@drawable/profile">
 
             <AutoCompleteTextView
                 android:id="@+id/election_type_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:paddingStart="10dp"/>
+                android:inputType="none"
+                android:paddingStart="10dp"
+                app:simpleItems="@array/sections" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Election Department (Dropdown) -->
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
             android:id="@+id/election_department_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Department"
             android:layout_marginTop="16dp"
+            android:backgroundTint="#ffff"
             app:startIconDrawable="@drawable/profile">
 
             <AutoCompleteTextView
                 android:id="@+id/election_department_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:paddingStart="10dp"/>
+                android:inputType="none"
+                android:paddingStart="10dp"
+                app:simpleItems="@array/departments" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Submit Button -->
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginTop="100dp"
             android:id="@+id/createElectionButton"
             style="@style/SolidButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
             android:layout_margin="10dp"
             android:text="Create Election" />
+
     </LinearLayout>
 </ScrollView>

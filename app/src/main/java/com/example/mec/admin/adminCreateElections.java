@@ -4,12 +4,17 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.mec.R;
 import com.example.mec.services.Elections;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DataSnapshot;
@@ -20,10 +25,11 @@ import java.util.Calendar;
 
 public class adminCreateElections extends AppCompatActivity {
 
-    private EditText electionTitleInput, electionDescriptionInput, electionDateInput, electionTimeInput, electionSectionInput, electionDepartmentInput;
+    private TextInputEditText electionTitleInput, electionDescriptionInput, electionDateInput, electionTimeInput;
+    private AutoCompleteTextView electionSectionInput, electionDepartmentInput;
     private Button createElectionButton;
     private DatabaseReference databaseReference;
-    private String electionId = null;  // For editing an existing election
+    private String electionId = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +48,12 @@ public class adminCreateElections extends AppCompatActivity {
         electionDepartmentInput = findViewById(R.id.election_department_input);
         createElectionButton = findViewById(R.id.createElectionButton);
 
+        // Set up dropdowns for Section and Department
+        setupDropdowns();
+
         // Check if this is editing an existing election or creating a new one
         electionId = getIntent().getStringExtra("electionId");
         if (electionId != null) {
-            // Fetch the election data from Firebase and populate the fields for editing
             fetchElectionData(electionId);
             createElectionButton.setText("Update Election");
         } else {
@@ -66,6 +74,72 @@ public class adminCreateElections extends AppCompatActivity {
                 showConfirmationDialog("Create", "Are you sure you want to create this election?");
             }
         });
+
+        // Set focus change listeners for real-time validation
+        setFocusChangeListeners();
+    }
+
+    // Set up dropdowns for Section and Department
+    private void setupDropdowns() {
+        // ArrayAdapters for dropdown items
+        ArrayAdapter<CharSequence> sectionAdapter = ArrayAdapter.createFromResource(this,
+                R.array.sections, android.R.layout.simple_dropdown_item_1line);
+        electionSectionInput.setAdapter(sectionAdapter);
+
+        ArrayAdapter<CharSequence> departmentAdapter = ArrayAdapter.createFromResource(this,
+                R.array.departments, android.R.layout.simple_dropdown_item_1line);
+        electionDepartmentInput.setAdapter(departmentAdapter);
+    }
+
+    // Set focus change listeners to validate inputs when moving to another field
+    private void setFocusChangeListeners() {
+        electionTitleInput.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                if (TextUtils.isEmpty(electionTitleInput.getText().toString().trim())) {
+                    electionTitleInput.setError("Title is required");
+                }
+            }
+        });
+
+        electionDescriptionInput.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                if (TextUtils.isEmpty(electionDescriptionInput.getText().toString().trim())) {
+                    electionDescriptionInput.setError("Description is required");
+                }
+            }
+        });
+
+        electionDateInput.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                if (TextUtils.isEmpty(electionDateInput.getText().toString().trim())) {
+                    electionDateInput.setError("Date is required");
+                }
+            }
+        });
+
+        electionTimeInput.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                if (TextUtils.isEmpty(electionTimeInput.getText().toString().trim())) {
+                    electionTimeInput.setError("Time is required");
+                }
+            }
+        });
+
+        electionSectionInput.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                if (TextUtils.isEmpty(electionSectionInput.getText().toString().trim())) {
+                    electionSectionInput.setError("Section is required");
+                }
+            }
+        });
+
+        electionDepartmentInput.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                if (TextUtils.isEmpty(electionDepartmentInput.getText().toString().trim())) {
+                    electionDepartmentInput.setError("Department is required");
+                }
+            }
+        });
     }
 
     // Method to show DatePickerDialog
@@ -78,7 +152,6 @@ public class adminCreateElections extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 adminCreateElections.this,
                 (view, selectedYear, selectedMonth, selectedDay) -> {
-                    // Set selected date to EditText
                     String date = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
                     electionDateInput.setText(date);
                 },
@@ -95,7 +168,6 @@ public class adminCreateElections extends AppCompatActivity {
         TimePickerDialog timePickerDialog = new TimePickerDialog(
                 adminCreateElections.this,
                 (view, selectedHour, selectedMinute) -> {
-                    // Set selected time to EditText
                     String time = String.format("%02d:%02d", selectedHour, selectedMinute);
                     electionTimeInput.setText(time);
                 },
@@ -103,7 +175,7 @@ public class adminCreateElections extends AppCompatActivity {
         timePickerDialog.show();
     }
 
-    // Method to fetch election data for editing
+    // Fetch election data for editing
     private void fetchElectionData(String electionId) {
         databaseReference.child(electionId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -111,7 +183,6 @@ public class adminCreateElections extends AppCompatActivity {
                 if (snapshot.exists()) {
                     Elections election = snapshot.getValue(Elections.class);
                     if (election != null) {
-                        // Populate the input fields with the election data
                         electionTitleInput.setText(election.getTitle());
                         electionDescriptionInput.setText(election.getDescription());
                         electionDateInput.setText(election.getDate());
@@ -137,12 +208,8 @@ public class adminCreateElections extends AppCompatActivity {
                 .setTitle(action + " Election")
                 .setMessage(message)
                 .setNeutralButton("Cancel", (dialog, which) -> dialog.dismiss())
-                .setNegativeButton("Decline", (dialog, which) -> {
-                    Toast.makeText(adminCreateElections.this, action + " declined.", Toast.LENGTH_SHORT).show();
-                })
-                .setPositiveButton(action, (dialog, which) -> {
-                    saveElectionData();
-                })
+                .setNegativeButton("Decline", (dialog, which) -> Toast.makeText(adminCreateElections.this, action + " declined.", Toast.LENGTH_SHORT).show())
+                .setPositiveButton(action, (dialog, which) -> saveElectionData())
                 .show();
     }
 
@@ -163,11 +230,9 @@ public class adminCreateElections extends AppCompatActivity {
         // Create or update election
         Elections election = new Elections(title, description, date, time, section, department);
         if (electionId == null) {
-            // New election
             electionId = databaseReference.push().getKey();
         }
 
-        // Save or update the election object to Firebase
         databaseReference.child(electionId).setValue(election).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Toast.makeText(adminCreateElections.this, "Election saved successfully.", Toast.LENGTH_LONG).show();
@@ -178,7 +243,7 @@ public class adminCreateElections extends AppCompatActivity {
         });
     }
 
-    // Validate form inputs
+    // Validate inputs
     private boolean validateInputs(String title, String description, String date, String time, String section, String department) {
         if (TextUtils.isEmpty(title)) {
             electionTitleInput.setError("Title is required");
@@ -207,7 +272,7 @@ public class adminCreateElections extends AppCompatActivity {
         return true;
     }
 
-    // Clear input fields after submission
+    // Clear input fields
     private void clearInputs() {
         electionTitleInput.setText("");
         electionDescriptionInput.setText("");

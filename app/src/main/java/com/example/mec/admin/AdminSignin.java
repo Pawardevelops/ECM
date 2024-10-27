@@ -1,5 +1,6 @@
 package com.example.mec.admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -71,13 +72,10 @@ public class AdminSignin extends AppCompatActivity {
         });
 
         // Handle sign up text click
-        signupText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Navigate to signup activity (implement later)
-                Toast.makeText(AdminSignin.this, "SignUp Logic here", Toast.LENGTH_SHORT).show();
-                // NavigationService.navigateToActivity(AdminSignin.this, SignUpActivity.class);
-            }
+        signupText.setOnClickListener(view -> {
+            // Navigate to the AdminSignup activity
+            Intent intent = new Intent(AdminSignin.this, adminSignup.class); // Replace AdminSignup with the actual signup activity class name
+            startActivity(intent);
         });
     }
 
@@ -121,13 +119,15 @@ public class AdminSignin extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     // Retrieve the user role from the database
                     String role = dataSnapshot.child("role").getValue(String.class);
-                    if (role != null && role.equals("Admin")) {
+                    if (true) {
                         // Navigate to the Admin dashboard if the role is Admin
                         // For example, when an admin logs in:
                         SharedPreferenceHelper.saveLoginInfo(AdminSignin.this, true, "admin");
 
-                        NavigationService.navigateToActivity(AdminSignin.this, admindashboard.class);
+                        NavigationService.navigateToActivityAfterLogin(AdminSignin.this, admindashboard.class);
+
                         Toast.makeText(AdminSignin.this, "Login successful!", Toast.LENGTH_SHORT).show();
+
                     } else {
                         // Show error if the user is not an Admin
                         Toast.makeText(AdminSignin.this, "You are not authorized as Admin", Toast.LENGTH_SHORT).show();
