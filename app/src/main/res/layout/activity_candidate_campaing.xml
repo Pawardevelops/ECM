@@ -1,36 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_marginTop="25dp"
+    android:padding="16dp"
+    android:background="#FFFFFF">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enter Your Campaign Slogan"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="10dp" />
 
-    <EditText
-        android:id="@+id/sloganInput"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter slogan here" />
-
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save Slogan"
-        android:layout_marginTop="10dp" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/sloganDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No slogan set"
-        android:textSize="16sp"
-        android:layout_marginTop="20dp" />
-</LinearLayout>
+        <LinearLayout
+            android:id="@+id/header_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:id="@+id/ECM_TEXT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="45sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary"
+                android:text="@string/ECM" />
+
+            <TextView
+                android:id="@+id/ECM_FULLFORM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="@string/ECM_fullform" />
+        </LinearLayout></LinearLayout>
+
+        <!-- Campaign Slogan Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Campaign Slogan"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/election_slogan_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Campaign Slogan">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/election_slogan_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:paddingStart="10dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saveButton"
+            style="@style/SolidButton"
+            android:padding="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="10dp"
+            android:text="Update Slogan" />
+
+        <!-- Agenda Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agenda"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/election_agenda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Agenda"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/election_agenda_input"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:inputType="textMultiLine"
+                android:minLines="4"
+                android:paddingStart="10dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saveAgenda"
+            style="@style/SolidButton"
+            android:padding="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="10dp"
+            android:text="Save Agenda" />
+
+        <!-- Candidate Promises Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Campaign Promises"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Promises Input Fields -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Promise 1">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/promise_input_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:paddingStart="10dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Save Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/savePromises"
+            style="@style/SolidButton"
+            android:padding="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="10dp"
+            android:text="Save Promises" />
+
+    </LinearLayout>
+</ScrollView>

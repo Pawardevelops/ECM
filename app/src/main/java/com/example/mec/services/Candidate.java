@@ -21,10 +21,9 @@ public class Candidate {
         this.course = course;
         this.section = section;
         this.semester = semester;
-        this.userType = userType;
+        this.role = userType;
         this.status = status;
         this.voteCount = votes;
-        role="candidate";
 
     }
 
@@ -41,7 +40,7 @@ public class Candidate {
         this.course = course;
         this.section = section;
         this.semester = semester;
-        this.userType = userType;
+        this.role = userType;
     }
 
     public Candidate() {
@@ -128,9 +127,6 @@ public class Candidate {
         return semester;
     }
 
-    public String getUserType() {
-        return userType;
-    }
 
     public String getStatus() {
         return status;
@@ -180,7 +176,11 @@ public class Candidate {
         this.semester = semester;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType;
+
+    public String getRole(String role){
+        return role;
+    }
+    public void setRole(String role){
+        this.role = role;
     }
 }
