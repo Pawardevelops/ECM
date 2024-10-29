@@ -40,9 +40,6 @@ public class voterCandidateSelection extends AppCompatActivity {
         section = getIntent().getStringExtra("SECTION");
         electionId = getIntent().getStringExtra("ELECTION_ID");  // Receiving election ID as well
 
-        // Debugging: Toast to check if values are received
-//        Toast.makeText(this, "Section: " + section + " ElectionID: " + electionId, Toast.LENGTH_LONG).show();
-
         if (section == null || electionId == null) {
             Toast.makeText(this, "No section or election ID found", Toast.LENGTH_SHORT).show();
             finish(); // Close the activity if no section or election ID is found
@@ -51,12 +48,12 @@ public class voterCandidateSelection extends AppCompatActivity {
         // Initialize Firebase Database reference
         candidatesRef = FirebaseDatabase.getInstance().getReference("candidates");
 
-        // Fetch and display candidates from the specified section
-        fetchCandidatesBySection(section);
+        // Fetch and display only approved candidates from the specified section
+        fetchApprovedCandidatesBySection(section);
     }
 
-    private void fetchCandidatesBySection(String section) {
-        // Query candidates where the section matches
+    private void fetchApprovedCandidatesBySection(String section) {
+        // Query candidates where the section matches and status is approved
         Query query = candidatesRef.orderByChild("section").equalTo(section);
 
         query.addValueEventListener(new ValueEventListener() {
@@ -65,7 +62,9 @@ public class voterCandidateSelection extends AppCompatActivity {
                 candidatesContainer.removeAllViews(); // Clear any previous candidates
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Candidate candidate = snapshot.getValue(Candidate.class);
-                    if (candidate != null) { // Ensure candidate object is not null
+
+                    // Only show candidates whose status is "approved"
+                    if (candidate != null && "approved".equals(candidate.getStatus())) {
                         addCandidateToLayout(candidate, snapshot.getKey()); // Pass the candidate UID
                     }
                 }

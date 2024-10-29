@@ -37,7 +37,7 @@
         android:id="@+id/select_candidate_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Candidate"
+        android:text="All Candidates List"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_gravity="center"

@@ -94,7 +94,7 @@ public class adminProfile extends AppCompatActivity {
                     String section = dataSnapshot.child("section").getValue(String.class);
                     String course = dataSnapshot.child("course").getValue(String.class);
                     String semester = dataSnapshot.child("semester").getValue(String.class);
-                    String imageUrl = dataSnapshot.child("imageUrl").getValue(String.class);
+                    String imageUrl = dataSnapshot.child("profileImageUrl").getValue(String.class);
 
                     // Set the data to the UI components
                     candidateUsername.setText(username);
