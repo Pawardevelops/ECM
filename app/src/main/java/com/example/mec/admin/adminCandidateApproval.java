@@ -78,7 +78,7 @@ public class adminCandidateApproval extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(adminCandidateApproval.this, "Failed to load candidates: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

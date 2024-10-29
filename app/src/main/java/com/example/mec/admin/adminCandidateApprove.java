@@ -60,7 +60,7 @@ public class adminCandidateApprove extends AppCompatActivity {
             candidateRef = FirebaseDatabase.getInstance().getReference("candidates").child(candidateUid);
             fetchCandidateDetails();
         } else {
-            Toast.makeText(this, "No candidate UID found", Toast.LENGTH_SHORT).show();
+            finish();
         }
 
         // Set onClickListener for approve button
@@ -107,15 +107,17 @@ public class adminCandidateApprove extends AppCompatActivity {
                         }
                     } else {
                         Toast.makeText(adminCandidateApprove.this, "Candidate not found", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 } else {
                     Toast.makeText(adminCandidateApprove.this, "Candidate data does not exist", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(adminCandidateApprove.this, "Failed to load candidate details: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }
@@ -123,7 +125,6 @@ public class adminCandidateApprove extends AppCompatActivity {
     private void updateCandidateStatus(String status) {
         candidateRef.child("status").setValue(status).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                Toast.makeText(adminCandidateApprove.this, "Candidate status updated to: " + status, Toast.LENGTH_SHORT).show();
                 if (status.equals("approved")) {
                     approveButton.setEnabled(false);
                     cancelButton.setVisibility(View.GONE); // Hide cancel button if approved

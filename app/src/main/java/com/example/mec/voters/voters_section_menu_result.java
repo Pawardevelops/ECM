@@ -47,7 +47,7 @@ public class voters_section_menu_result extends AppCompatActivity {
     // Method to fetch completed elections from Firebase
     // Method to fetch completed elections from Firebase
     private void fetchCompletedElections() {
-        electionsRef.orderByChild("status").equalTo("completed").addListenerForSingleValueEvent(new ValueEventListener() {
+        electionsRef.orderByChild("status").equalTo("Finished").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 completedElections = new ArrayList<>();
@@ -89,7 +89,7 @@ public class voters_section_menu_result extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(voters_section_menu_result.this, "Error fetching elections: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

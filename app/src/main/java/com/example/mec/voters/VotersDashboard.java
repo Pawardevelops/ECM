@@ -131,6 +131,7 @@ public class VotersDashboard extends AppCompatActivity {
                     }
                 } else {
                     stopShimmerAndShowError("Voter data not found.");
+
                 }
             }
 

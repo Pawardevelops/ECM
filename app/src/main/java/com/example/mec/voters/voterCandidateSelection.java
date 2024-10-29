@@ -41,7 +41,7 @@ public class voterCandidateSelection extends AppCompatActivity {
         electionId = getIntent().getStringExtra("ELECTION_ID");  // Receiving election ID as well
 
         // Debugging: Toast to check if values are received
-        Toast.makeText(this, "Section: " + section + " ElectionID: " + electionId, Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Section: " + section + " ElectionID: " + electionId, Toast.LENGTH_LONG).show();
 
         if (section == null || electionId == null) {
             Toast.makeText(this, "No section or election ID found", Toast.LENGTH_SHORT).show();
@@ -74,6 +74,7 @@ public class voterCandidateSelection extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(voterCandidateSelection.this, "Failed to load candidates: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

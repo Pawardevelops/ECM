@@ -81,6 +81,7 @@ public class adminElections extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
                 // Handle possible errors
                 Toast.makeText(adminElections.this, "Failed to load elections.", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

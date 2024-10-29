@@ -41,7 +41,7 @@ public class admindashboard extends AppCompatActivity {
             public void onClick(View v) {
 //                NavigationService.navigateToActivity(FAQActivity.this,);
                 Intent intent = new Intent(admindashboard.this, adminProfile.class);
-                intent.putExtra("db", "Admins"); // Send "candidates" as the value for the "db" key
+                intent.putExtra("db", "admins"); // Send "candidates" as the value for the "db" key
                 startActivity(intent);
             }
         });
@@ -80,7 +80,6 @@ public class admindashboard extends AppCompatActivity {
         createElection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(admindashboard.this, "campaignManagementButton page", Toast.LENGTH_SHORT).show();
 
                 NavigationService.navigateToActivity(admindashboard.this, adminElections.class);
             }

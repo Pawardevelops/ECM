@@ -114,12 +114,14 @@ public class adminProfile extends AppCompatActivity {
                     }
                 } else {
                     Toast.makeText(adminProfile.this, "Admin profile data not found", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(adminProfile.this, "Failed to load profile: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

@@ -15,6 +15,7 @@ import com.example.mec.ProfileActivity;
 import com.example.mec.R;
 import com.example.mec.voters.voters_allCandidate_result;
 import com.example.mec.voters.voters_all_candidates;
+import com.example.mec.voters.voters_section_menu_result;
 
 public class candidateDashboard extends AppCompatActivity {
 
@@ -50,7 +51,7 @@ public class candidateDashboard extends AppCompatActivity {
         resultsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(candidateDashboard.this, voters_allCandidate_result.class);
+                Intent intent = new Intent(candidateDashboard.this, voters_section_menu_result.class);
                 startActivity(intent);
             }
         });
@@ -76,18 +77,9 @@ public class candidateDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(candidateDashboard.this, candidateCampaing.class);
                 startActivity(intent);
-              //  Toast.makeText(candidateDashboard.this,"test",Toast.LENGTH_LONG).show();
             }
         });
 
-       /* supporterInteractionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(candidateDashboard.this, SupporterInteractionActivity.class);
-//                startActivity(intent);
-                Toast.makeText(candidateDashboard.this,"test",Toast.LENGTH_LONG).show();
 
-            }
-        });*/
     }
 }

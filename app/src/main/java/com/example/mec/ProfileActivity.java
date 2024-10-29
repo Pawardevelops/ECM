@@ -59,7 +59,6 @@ public class ProfileActivity extends AppCompatActivity {
         if (currentUser != null) {
             String uid = currentUser.getUid(); // This is the unique UID for the logged-in user
             fetchUserProfile(db,uid); // Fetch user profile based on UID
-            Toast.makeText(this, "User id : "+uid, Toast.LENGTH_SHORT).show();
 
 
         } else {
@@ -116,13 +115,14 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 } else {
                     Toast.makeText(ProfileActivity.this, "Profile data not found", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Handle database error
-                Toast.makeText(ProfileActivity.this, "Failed to load profile: " + databaseError.getMessage(), Toast.LENGTH_LONG).show();
+                finish();
             }
         });
     }

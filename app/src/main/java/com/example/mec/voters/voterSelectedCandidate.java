@@ -153,7 +153,7 @@ public class voterSelectedCandidate extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("Firebase", "Error fetching data: " + databaseError.getMessage());
+                finish();
             }
         });
     }
@@ -275,7 +275,7 @@ public class voterSelectedCandidate extends AppCompatActivity {
                         }
                     });
         } else {
-            Toast.makeText(voterSelectedCandidate.this, "Error generating vote ID.", Toast.LENGTH_SHORT).show();
+    finish();
         }
     }
 

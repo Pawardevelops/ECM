@@ -74,7 +74,7 @@ public class voters_allCandidate_result extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(voters_allCandidate_result.this, "Error fetching votes: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

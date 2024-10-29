@@ -155,7 +155,7 @@ public class adminSignup extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     uploadProfileImage(firstNameInput, lastNameInput, departmentInput, courseInput, sectionInput, semesterInput, emailInput, registrationNoInput);
                 } else {
-                    Toast.makeText(adminSignup.this, "Sign-up failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(adminSignup.this, "Sign-up failed: " , Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                     signUpButton.setVisibility(View.VISIBLE);
                 }
@@ -291,7 +291,7 @@ public class adminSignup extends AppCompatActivity {
                     signUpButton.setVisibility(View.VISIBLE);
                     finish(); // Close the activity
                 } else {
-                    Toast.makeText(adminSignup.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(adminSignup.this, "Registration failed: ", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                     signUpButton.setVisibility(View.VISIBLE);
                 }

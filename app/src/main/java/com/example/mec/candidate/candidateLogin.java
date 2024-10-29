@@ -111,7 +111,7 @@ public class candidateLogin extends AppCompatActivity {
                     } else {
                         // Login failed, show error message
                         setLoadingState(false);
-                        Toast.makeText(candidateLogin.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(candidateLogin.this, "Login failed: ", Toast.LENGTH_LONG).show();
                     }
                 });
 

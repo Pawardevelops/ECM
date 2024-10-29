@@ -192,12 +192,14 @@ public class adminCreateElections extends AppCompatActivity {
                     }
                 } else {
                     Toast.makeText(adminCreateElections.this, "Election not found.", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 Toast.makeText(adminCreateElections.this, "Failed to load election data.", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }
