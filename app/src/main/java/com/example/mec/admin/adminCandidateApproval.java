@@ -57,13 +57,13 @@ public class adminCandidateApproval extends AppCompatActivity {
                     if (candidate != null) {
                         candidate.setUid(snapshot.getKey()); // Set UID from the snapshot key
                         switch (candidate.getStatus()) {
-                            case "Pending":
+                            case "pending":
                                 pendingCandidates.add(candidate);
                                 break;
                             case "approved":
                                 approvedCandidates.add(candidate);
                                 break;
-                            case "canceled":
+                            case "cancelled":
                                 canceledCandidates.add(candidate);
                                 break;
                         }
@@ -135,7 +135,7 @@ public class adminCandidateApproval extends AppCompatActivity {
                 statusChip.setTextColor(getResources().getColor(R.color.green));
 
                 break;
-            case "canceled":
+            case "cancelled":
                 statusChip.setChipBackgroundColorResource(R.color.lightred); // Replace with your red color
                statusChip.setTextColor(getResources().getColor(R.color.red));
                 break;
