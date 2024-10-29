@@ -95,7 +95,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/phone"
+                    android:src="@drawable/email1"
                     android:layout_weight="1"
 
                     />
@@ -103,7 +103,7 @@
                     android:id="@+id/phone_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Phone"
+                    android:text="Email"
                     android:layout_weight="4"
                     android:textColor="@color/black"
                     android:textSize="17dp"

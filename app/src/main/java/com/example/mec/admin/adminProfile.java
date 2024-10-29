@@ -89,7 +89,7 @@ public class adminProfile extends AppCompatActivity {
                     // Fetch and display the data
                     String username = dataSnapshot.child("firstName").getValue(String.class) + " " + dataSnapshot.child("lastName").getValue(String.class);
                     String registrationNumber = dataSnapshot.child("registrationNo").getValue(String.class);
-                    String phone = dataSnapshot.child("phone").getValue(String.class);
+                    String phone = dataSnapshot.child("email").getValue(String.class);
                     String department = dataSnapshot.child("department").getValue(String.class);
                     String section = dataSnapshot.child("section").getValue(String.class);
                     String course = dataSnapshot.child("course").getValue(String.class);
