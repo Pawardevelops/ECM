@@ -5,11 +5,35 @@
     android:padding="16dp"
     android:orientation="vertical"
     android:background="#FFFFFF">
+    <LinearLayout
+        android:id="@+id/header_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/ECM_TEXT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="45sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:text="@string/ECM" />
+
+        <TextView
+            android:id="@+id/ECM_FULLFORM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="@string/ECM_fullform" />
+    </LinearLayout>
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="450dp">
+        android:layout_height="400dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
